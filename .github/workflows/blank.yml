@@ -28,6 +28,20 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
+        
+      - name: Build count
+        uses: wolfgangB33r/dynatrace-github-action@v5
+        with:
+          url: '${{ secrets.DT_URL }}'
+          token: '${{ secrets.DT_TOKEN }}'
+          metrics: |
+            - metric: "github.metric1"
+            value: "1.0"
+            dimensions:
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+              owner: wolfgang
 
       # Call the Dynatrace git action
       - name: Dynatrace Info Event
@@ -35,6 +49,21 @@ jobs:
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
+          metrics: |
+            - metric: "github.build.total"
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: wolfgang
+            - metric: "github.build.success"
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: wolfgang
           events: |
             - title: "GitHub Action Info Event"
               type: CUSTOM_INFO
