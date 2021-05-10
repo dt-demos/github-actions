@@ -46,5 +46,4 @@ jobs:
                 project: "${{ github.repository }}"
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
-            owner: ${{ github.repository_owner }}
-
+              owner: ${{ github.repository_owner }}
