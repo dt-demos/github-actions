@@ -36,12 +36,12 @@ jobs:
           token: '${{ secrets.DT_TOKEN }}'
           metrics: |
             - metric: "github.metric1"
-            value: "1.0"
-            dimensions:
-              project: "${{ github.repository }}"
-              branch: "${{ github.ref }}"
-              event: "${{ github.event_name }}"
-              owner: wolfgang
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: "${{ github.repository_owner }}"
 
       # Call the Dynatrace git action
       - name: Dynatrace Info Event
@@ -56,14 +56,14 @@ jobs:
                 project: "${{ github.repository }}"
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
-                owner: wolfgang
+                owner: "${{ github.repository_owner }}"
             - metric: "github.build.success"
               value: "1.0"
               dimensions:
                 project: "${{ github.repository }}"
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
-                owner: wolfgang
+                owner: "${{ github.repository_owner }}"
           events: |
             - title: "GitHub Action Info Event"
               type: CUSTOM_INFO
