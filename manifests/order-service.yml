@@ -18,8 +18,8 @@ spec:
   template:
     metadata:
       labels:
-        app: dt-orders
-        service: order
+        app.kubernetes.io/part-of: dt-orders
+        app.kubernetes.io/name: order-service
     spec:
       containers:
       - name: order
