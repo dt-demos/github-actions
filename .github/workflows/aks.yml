@@ -3,7 +3,11 @@ name: Deploy to AKS
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    
+    inputs:
+      customer-version:
+        description: 'Customer Service Version'     
+        required: true
+        default: '1'
 env:
   REGISTRY_NAME: dtdemos
   CLUSTER_NAME: jahn-aks-demo
@@ -46,7 +50,7 @@ jobs:
             description: "dt-orders frontend deployment"
             source: GitHub
             tags:
-              - SERVICE:service:frontendBAD
+              - SERVICE:service:frontend
             dimensions:
               project: "${{ github.repository }}"
               branch: "${{ github.ref }}"
@@ -60,7 +64,24 @@ jobs:
         manifests: |
           manifests/customer-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:1.0.0
+          ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:${{ github.event.inputs.customer-version }}
+    - name: "Dynatrace Deployment Event Customer Service"
+      uses: dynatrace-oss/dynatrace-github-action@v5
+      with:
+        url: '${{ secrets.DT_URL }}'
+        token: '${{ secrets.DT_TOKEN }}'
+        events: |
+          - title: "dt-orders customer-service deployment"
+            type: CUSTOM_INFO
+            description: "dt-orders customer-service deployment"
+            source: GitHub
+            tags:
+              - SERVICE:service:customer
+            dimensions:
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+            owner: ${{ github.repository_owner }}
     - name: "Deploy catalog-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -70,6 +91,23 @@ jobs:
           manifests/catalog-service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:1.0.0
+    - name: "Dynatrace Deployment Event Catalog Service"
+      uses: dynatrace-oss/dynatrace-github-action@v5
+      with:
+        url: '${{ secrets.DT_URL }}'
+        token: '${{ secrets.DT_TOKEN }}'
+        events: |
+          - title: "dt-orders catalog-service deployment"
+            type: CUSTOM_INFO
+            description: "dt-orders catalog-service deployment"
+            source: GitHub
+            tags:
+              - SERVICE:service:catalog
+            dimensions:
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+            owner: ${{ github.repository_owner }}
     - name: "Deploy order-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -79,6 +117,23 @@ jobs:
           manifests/order-service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-order-service:1.0.0
+    - name: "Dynatrace Deployment Event Order Service"
+      uses: dynatrace-oss/dynatrace-github-action@v5
+      with:
+        url: '${{ secrets.DT_URL }}'
+        token: '${{ secrets.DT_TOKEN }}'
+        events: |
+          - title: "dt-orders order-service deployment"
+            type: CUSTOM_INFO
+            description: "dt-orders order-service deployment"
+            source: GitHub
+            tags:
+              - SERVICE:service:order
+            dimensions:
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+            owner: ${{ github.repository_owner }}
     - name: "Deploy load-traffic"
       uses: azure/k8s-deploy@v1.4
       with:
