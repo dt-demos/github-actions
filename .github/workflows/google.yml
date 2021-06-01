@@ -32,7 +32,6 @@ jobs:
         action: deploy
         manifests: |
           manifests/frontend.yml
-          manifests/service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1.0.0
     - uses: azure/k8s-deploy@v1.4
