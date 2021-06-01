@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: browser-traffic
   labels:
     app: dt-orders
     service: browser-traffic
@@ -23,6 +23,6 @@ spec:
         imagePullPolicy: Always
         env:
         - name: APP_URL
-          value: http://frontend
+          value: "http://frontend"
         - name: SCRIPT_NUM_LOOPS
-          value: 15000
+          value: "15000"

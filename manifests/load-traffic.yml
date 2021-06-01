@@ -23,8 +23,8 @@ spec:
         imagePullPolicy: Always
         env:
         - name: HOSTNAME
-          value: frontend
+          value: "frontend"
         - name: NUM_LOOPS
-          value: 100000
+          value: "100000"
         - name: TEST_DEBUG
-          value: false
+          value: "false"
