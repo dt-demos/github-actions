@@ -35,6 +35,23 @@ jobs:
           manifests/frontend.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1.0.0
+    - name: Dynatrace Deployment Event frontend
+        uses: dynatrace-oss/dynatrace-github-action@v5
+        with:
+          url: '${{ secrets.DT_URL }}'
+          token: '${{ secrets.DT_TOKEN }}'
+          events: |
+            - title: "GitHub Action Info Event"
+              type: CUSTOM_INFO
+              description: "Branch ${{ github.ref }} failed to build"
+              source: GitHub
+              tags:
+                - SERVICE:[Kubernetes]service:frontend
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+              owner: ${{ github.repository_owner }}
     - name: "Deploy customer-service"
       uses: azure/k8s-deploy@v1.4
       with:
