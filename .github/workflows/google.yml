@@ -28,8 +28,8 @@ jobs:
     - uses: azure/k8s-deploy@v1
       with:
         manifests: |
-          manifests/deployment.yml
-          manifests/service.yml
+          ./manifests/deployment.yml
+          ./manifests/service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:1
         namespace: ${{ env.NAMESPACE }}
