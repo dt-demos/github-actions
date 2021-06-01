@@ -1,0 +1,27 @@
+name: Deploy to AKS
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    
+env:
+  REGISTRY_NAME: dtdemos
+  CLUSTER_NAME: jahn-aks-demo
+  CLUSTER_RESOURCE_GROUP: jahn-aks-demo
+  NAMESPACE: dt-orders
+  
+jobs:
+  setup-build-publish-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    # Set the target Azure Kubernetes Service (AKS) cluster. 
+    - uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+    # Create namespace if doesn't exist
+    - run: |
+        kubectl create namespace ${{ env.NAMESPACE }} --dry-run -o json | kubectl apply -f -
+
