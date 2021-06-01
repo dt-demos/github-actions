@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer
+  labels:
+    app: dt-orders
+    service: customer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dt-orders
+      service: customer
+  template:
+    metadata:
+      labels:
+        app: dt-orders
+        service: customer
+    spec:
+      containers:
+      - name: customer
+        image: dtdemos/dt-orders-customer-service:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: cust-service
