@@ -55,6 +55,14 @@ jobs:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
         manifests: |
+          manifests/order-service.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:1.0.0
+    - uses: azure/k8s-deploy@v1.4
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        action: deploy
+        manifests: |
           manifests/load-traffic
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-load:1.0.0
