@@ -4,7 +4,7 @@ metadata:
   name: order
   labels:
     app.kubernetes.io/name: order-service
-    app.kubernetes.io/version: 1
+    app.kubernetes.io/version: "1"
     app.kubernetes.io/component: service
     app.kubernetes.io/part-of: dt-orders
     app.kubernetes.io/managed-by: helm
