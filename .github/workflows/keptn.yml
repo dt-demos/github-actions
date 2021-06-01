@@ -1,0 +1,41 @@
+name: SLO Evaluation
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  slo-evaluation:
+    name: Evaluation
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send Keptn Event
+      id: send-keptn-event
+      uses: keptn/gh-action-send-event@main
+      with:
+        keptnApiUrl: ${{ secrets.KEPTN_API_URL }}
+        keptnApiToken: ${{ secrets.KEPTN_API_TOKEN }}
+        event: |
+          {
+            "data": {
+              "deployment": {
+                "deploymentNames": null
+              },
+              "evaluation": {
+                "end": "2021-04-28T23:16:53.000Z",
+                "start": "2021-04-28T22:46:53.000Z"
+              },
+              "project": "dynatrace",
+              "service": "demo",
+              "stage": "quality-gate",
+              "test": {
+                "end": "",
+                "start": ""
+              }
+            },
+            "source": "https://github.com/keptn/keptn/api",
+            "specversion": "1.0",
+            "time": "2021-04-28T23:16:53.805Z",
+            "type": "sh.keptn.event.quality-gate.evaluation.triggered",
+            "shkeptnspecversion": "0.2.1"
+          }
