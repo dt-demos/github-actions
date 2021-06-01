@@ -27,7 +27,7 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-          name: cust-service
+          name: order-service
 ---
 apiVersion: v1
 kind: Service
