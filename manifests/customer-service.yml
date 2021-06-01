@@ -4,7 +4,7 @@ metadata:
   name: customer
   labels:
     app.kubernetes.io/name: customer-service
-    app.kubernetes.io/version: 1
+    app.kubernetes.io/version: "1"
     app.kubernetes.io/component: service
     app.kubernetes.io/part-of: dt-orders
     app.kubernetes.io/managed-by: helm
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: customer
-        image: dtdemos/dt-orders-customer-service:1.0.0
+        image: dtdemos/dt-orders-customer-service:1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

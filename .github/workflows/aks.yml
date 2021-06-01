@@ -38,7 +38,7 @@ jobs:
         manifests: |
           manifests/frontend.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1.0.0
+          ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1
     - name: "Dynatrace Deployment Event frontend"
       uses: dynatrace-oss/dynatrace-github-action@v5
       with:
@@ -90,7 +90,7 @@ jobs:
         manifests: |
           manifests/catalog-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:1.0.0
+          ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:1
     - name: "Dynatrace Deployment Event Catalog Service"
       uses: dynatrace-oss/dynatrace-github-action@v5
       with:
@@ -116,7 +116,7 @@ jobs:
         manifests: |
           manifests/order-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:1.0.0
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:1
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v5
       with:
@@ -142,7 +142,7 @@ jobs:
         manifests: |
           manifests/load-traffic.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-load:1.0.0
+          ${{ env.REGISTRY_NAME }}/dt-orders-load:1
     - name: "Deploy browser-traffic"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -151,4 +151,4 @@ jobs:
         manifests: |
           manifests/browser-traffic.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-browser:1.0.0
+          ${{ env.REGISTRY_NAME }}/dt-orders-browser:1

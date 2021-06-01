@@ -4,7 +4,7 @@ metadata:
   name: browser-traffic
   labels:
     app.kubernetes.io/name: browser-traffic
-    app.kubernetes.io/version: 1
+    app.kubernetes.io/version: "1"
     app.kubernetes.io/component: traffic-simulation
     app.kubernetes.io/part-of: dt-orders
     app.kubernetes.io/managed-by: helm
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: browser-traffic
-        image: dtdemos/dt-orders-browser:1.0.0
+        image: dtdemos/dt-orders-browser:1
         imagePullPolicy: Always
         env:
         - name: APP_URL

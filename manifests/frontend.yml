@@ -4,7 +4,7 @@ metadata:
   name: frontend
   labels:
     app.kubernetes.io/name: frontend
-    app.kubernetes.io/version: 1
+    app.kubernetes.io/version: "1"
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: dt-orders
     app.kubernetes.io/managed-by: helm
@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: dtdemos/dt-orders-frontend:1.0.0
+        image: dtdemos/dt-orders-frontend:1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

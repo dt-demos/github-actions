@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: load-traffic
-        image: dtdemos/dt-orders-load:1.0.0
+        image: dtdemos/dt-orders-load:1
         imagePullPolicy: Always
         env:
         - name: HOSTNAME
