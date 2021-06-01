@@ -24,3 +24,20 @@ spec:
         ports:
         - containerPort: 8080
           name: cust-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer
+  labels:
+    app: dt-orders
+    service: customer
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: customer
+  selector:
+    app: dt-orders
+    service: customer
+  type: ClusterIP
