@@ -4,6 +4,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
+      order-version:
+        description: 'Order Service Version'     
+        required: true
+        default: '1'
       customer-version:
         description: 'Customer Service Version'     
         required: true
@@ -116,16 +120,16 @@ jobs:
         manifests: |
           manifests/order-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:1
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.customer-version }}
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v5
       with:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy order-service version 1"
+          - title: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
             type: CUSTOM_INFO
-            description: "Deploy order-service version 1"
+            description: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
             source: GitHub
             tags:
               - SERVICE:service:order
