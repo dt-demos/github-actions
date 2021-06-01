@@ -17,16 +17,17 @@ jobs:
     steps:
     - name: "Get code from github repo"
       uses: actions/checkout@master
-    # Set the target Azure Kubernetes Service (AKS) cluster. 
-    - uses: azure/aks-set-context@v1
+    - name: "Set the target AKS cluster"
+      uses: azure/aks-set-context@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: ${{ env.CLUSTER_NAME }}
         resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
-    # Create namespace if doesn't exist
-    - run: |
+    - name: "Create namespace if doesn't exist"
+      run: |
         kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
-    - uses: azure/k8s-deploy@v1.4
+    - name: "Deploy frontend"
+      uses: azure/k8s-deploy@v1.4
       with:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
@@ -34,7 +35,8 @@ jobs:
           manifests/frontend.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1.0.0
-    - uses: azure/k8s-deploy@v1.4
+    - name: "Deploy customer-service"
+      uses: azure/k8s-deploy@v1.4
       with:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
@@ -42,7 +44,8 @@ jobs:
           manifests/customer-service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:1.0.0
-    - uses: azure/k8s-deploy@v1.4
+    - name: "Deploy catalog-service"
+      uses: azure/k8s-deploy@v1.4
       with:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
@@ -50,7 +53,8 @@ jobs:
           manifests/catalog-service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:1.0.0
-    - uses: azure/k8s-deploy@v1.4
+    - name: "Deploy order-service"
+      uses: azure/k8s-deploy@v1.4
       with:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
@@ -58,7 +62,8 @@ jobs:
           manifests/order-service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-order-service:1.0.0
-    - uses: azure/k8s-deploy@v1.4
+    - name: "Deploy load-traffic"
+      uses: azure/k8s-deploy@v1.4
       with:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
@@ -66,7 +71,8 @@ jobs:
           manifests/load-traffic.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-load:1.0.0
-    - uses: azure/k8s-deploy@v1.4
+    - name: "Deploy browser-traffic"
+      uses: azure/k8s-deploy@v1.4
       with:
         namespace: ${{ env.NAMESPACE }}
         action: deploy
