@@ -45,9 +45,9 @@ jobs:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "dt-orders frontend deployment"
+          - title: "Deploy frontend version 1"
             type: CUSTOM_INFO
-            description: "dt-orders frontend deployment"
+            description: "Deploy frontend version 1"
             source: GitHub
             tags:
               - SERVICE:service:frontend
@@ -71,9 +71,9 @@ jobs:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "dt-orders customer-service deployment"
+          - title: "Deploy customer-service version ${{ github.event.inputs.customer-version }}"
             type: CUSTOM_INFO
-            description: "dt-orders customer-service deployment"
+            description: "Deploy customer-service version ${{ github.event.inputs.customer-version }}"
             source: GitHub
             tags:
               - SERVICE:service:customer
@@ -97,9 +97,9 @@ jobs:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "dt-orders catalog-service deployment"
+          - title: "Deploy catalog-service version 1"
             type: CUSTOM_INFO
-            description: "dt-orders catalog-service deployment"
+            description: "Deploy catalog-service version 1"
             source: GitHub
             tags:
               - SERVICE:service:catalog
@@ -123,9 +123,9 @@ jobs:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "dt-orders order-service deployment"
+          - title: "Deploy order-service version 1"
             type: CUSTOM_INFO
-            description: "dt-orders order-service deployment"
+            description: "Deploy order-service version 1"
             source: GitHub
             tags:
               - SERVICE:service:order

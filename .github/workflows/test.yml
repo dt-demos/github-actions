@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Test Dynatrace OSS Action
 
 # Controls when the action will run. 
 on:
@@ -30,7 +30,7 @@ jobs:
         run: echo Hello, world!
         
       - name: Build count
-        uses: wolfgangB33r/dynatrace-github-action@v5
+        uses: dynatrace-oss/dynatrace-github-action@v5
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
@@ -45,7 +45,7 @@ jobs:
 
       # Call the Dynatrace git action
       - name: Dynatrace Info Event
-        uses: wolfgangB33r/dynatrace-github-action@v5
+        uses: dynatrace-oss/dynatrace-github-action@v5
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
