@@ -23,5 +23,13 @@ jobs:
         resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
     # Create namespace if doesn't exist
     - run: |
-        kubectl create namespace ${{ env.NAMESPACE }} --dry-run -o json | kubectl apply -f -
-
+        kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
+    # Deploy app to AKS
+    - uses: azure/k8s-deploy@v1
+      with:
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:1
+        namespace: ${{ env.NAMESPACE }}
