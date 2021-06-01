@@ -46,7 +46,7 @@ jobs:
             description: "dt-orders frontend deployment"
             source: GitHub
             tags:
-              - SERVICE:service:frontend
+              - SERVICE:service:frontendBAD
             dimensions:
               project: "${{ github.repository }}"
               branch: "${{ github.ref }}"
