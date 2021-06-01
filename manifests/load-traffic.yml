@@ -4,7 +4,7 @@ metadata:
   name: load-traffic
   labels:
     app.kubernetes.io/name: load-traffic
-    app.kubernetes.io/version: 1
+    app.kubernetes.io/version: "1"
     app.kubernetes.io/component: traffic-simulation
     app.kubernetes.io/part-of: dt-orders
     app.kubernetes.io/managed-by: helm
