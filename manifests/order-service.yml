@@ -3,14 +3,18 @@ kind: Deployment
 metadata:
   name: order
   labels:
-    app: dt-orders
-    service: order
+    app.kubernetes.io/name: order-service
+    app.kubernetes.io/version: 1
+    app.kubernetes.io/component: service
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/created-by: dynatrace-demos
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dt-orders
-      service: order
+      app.kubernetes.io/part-of: dt-orders
+      app.kubernetes.io/name: order-service
   template:
     metadata:
       labels:
@@ -30,14 +34,14 @@ kind: Service
 metadata:
   name: order
   labels:
-    app: dt-orders
-    service: order
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/name: order-service
 spec:
   ports:
     - port: 8080
       targetPort: 8080
       name: order
   selector:
-    app: dt-orders
-    service: order
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/name: order-service
   type: ClusterIP

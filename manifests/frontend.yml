@@ -4,7 +4,7 @@ metadata:
   name: frontend
   labels:
     app.kubernetes.io/name: frontend
-    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/version: 1
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: dt-orders
     app.kubernetes.io/managed-by: helm
@@ -13,13 +13,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dt-orders
-      service: frontend
+      app.kubernetes.io/part-of: dt-orders
+      app.kubernetes.io/name: frontend
   template:
     metadata:
       labels:
-        app: dt-orders
-        service: frontend
+        app.kubernetes.io/part-of: dt-orders
+        app.kubernetes.io/name: frontend
     spec:
       containers:
       - name: frontend
@@ -34,14 +34,14 @@ kind: Service
 metadata:
   name: frontend
   labels:
-    app: dt-orders
-    service: frontend
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/name: frontend
 spec:
   ports:
     - port: 80
       targetPort: 8080
       name: frontend
   selector:
-    app: dt-orders
-    service: frontend
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/name: frontend
   type: LoadBalancer

@@ -3,19 +3,23 @@ kind: Deployment
 metadata:
   name: customer
   labels:
-    app: dt-orders
-    service: customer
+    app.kubernetes.io/name: customer-service
+    app.kubernetes.io/version: 1
+    app.kubernetes.io/component: service
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/created-by: dynatrace-demos
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dt-orders
-      service: customer
+      app.kubernetes.io/part-of: dt-orders
+      app.kubernetes.io/name: customer-service
   template:
     metadata:
       labels:
-        app: dt-orders
-        service: customer
+        app.kubernetes.io/part-of: dt-orders
+        app.kubernetes.io/name: customer-service
     spec:
       containers:
       - name: customer
@@ -30,14 +34,14 @@ kind: Service
 metadata:
   name: customer
   labels:
-    app: dt-orders
-    service: customer
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/name: customer-service
 spec:
   ports:
     - port: 8080
       targetPort: 8080
       name: customer
   selector:
-    app: dt-orders
-    service: customer
+    app.kubernetes.io/part-of: dt-orders
+    app.kubernetes.io/name: customer-service
   type: ClusterIP
