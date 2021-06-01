@@ -15,6 +15,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+    - name: "Get code from github repo"
+      uses: actions/checkout@master
     # Set the target Azure Kubernetes Service (AKS) cluster. 
     - uses: azure/aks-set-context@v1
       with:
