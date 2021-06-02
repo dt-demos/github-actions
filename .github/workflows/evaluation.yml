@@ -31,3 +31,6 @@ jobs:
             "type": "sh.keptn.event.quality-gate.evaluation.triggered",
             "shkeptnspecversion": "0.2.1"
           }
+        run: core.setOutput("keptncontext", ctx)
+    - name: Get color
+      run: echo "The keptncontext is ${{ steps.send-keptn-event.outputs.ctx }}"
