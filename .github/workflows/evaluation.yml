@@ -32,4 +32,4 @@ jobs:
             "shkeptnspecversion": "0.2.1"
           }
     - name: Show keptnContext
-      run: echo "The keptnContext is ${{ steps.send-keptn-event.keptnContext }}"
+      run: echo "The keptnContext is ${{ steps.send-keptn-event.outputs.keptnContext }}"
