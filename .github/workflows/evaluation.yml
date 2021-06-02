@@ -19,8 +19,8 @@ jobs:
           {
             "data": {
               "evaluation": {
-                "end": "2021-05-01T00:00:00.000Z",
-                "start": "2021-05-01T01:00:00.000Z"
+                "end": "2021-05-01T00:02:00.000Z",
+                "start": "2021-05-01T00:00:00.000Z"
               },
               "project": "dynatrace",
               "service": "journeyservice",
