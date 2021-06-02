@@ -22,8 +22,7 @@ jobs:
                 "deploymentNames": null
               },
               "evaluation": {
-                "end": "2021-04-28T23:16:53.000Z",
-                "start": "2021-04-28T22:46:53.000Z"
+                "timeframe " : "5m"
               },
               "project": "dynatrace",
               "service": "demo",
@@ -33,9 +32,8 @@ jobs:
                 "start": ""
               }
             },
-            "source": "https://github.com/keptn/keptn/api",
+            "source": "https://keptn.keptn-demo.alliances.dynatracelabs.com",
             "specversion": "1.0",
-            "time": "2021-04-28T23:16:53.805Z",
             "type": "sh.keptn.event.quality-gate.evaluation.triggered",
             "shkeptnspecversion": "0.2.1"
           }
