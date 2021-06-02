@@ -31,5 +31,5 @@ jobs:
             "type": "sh.keptn.event.quality-gate.evaluation.triggered",
             "shkeptnspecversion": "0.2.1"
           }
-    - name: Show keptncontext
-      run: echo "The keptncontext is ${{ steps.send-keptn-event.keptncontext }}"
+    - name: Show keptnContext
+      run: echo "The keptnContext is ${{ steps.send-keptn-event.keptnContext }}"
