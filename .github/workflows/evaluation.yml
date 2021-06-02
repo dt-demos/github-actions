@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Send Keptn Event
       id: send-keptn-event
-      uses: keptn/gh-action-send-event@main
+      uses: keptn/gh-action-send-event@feature/keptn-context-as-output
       with:
         keptnApiUrl: ${{ secrets.KEPTN_API_URL }}
         keptnApiToken: ${{ secrets.KEPTN_API_TOKEN }}
@@ -32,4 +32,4 @@ jobs:
             "shkeptnspecversion": "0.2.1"
           }
     - name: Show keptncontext
-      run: echo "The keptncontext is ${{ steps.send-keptn-event.outputs[1].* }}"
+      run: echo "The keptncontext is ${{ steps.send-keptn-event.keptncontext }}"
