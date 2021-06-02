@@ -18,19 +18,12 @@ jobs:
         event: |
           {
             "data": {
-              "deployment": {
-                "deploymentNames": null
-              },
               "evaluation": {
                 "timeframe " : "5m"
               },
               "project": "dynatrace",
-              "service": "demo",
-              "stage": "quality-gate",
-              "test": {
-                "end": "",
-                "start": ""
-              }
+              "service": "journeyservice",
+              "stage": "quality-gate"
             },
             "source": "https://keptn.keptn-demo.alliances.dynatracelabs.com",
             "specversion": "1.0",
