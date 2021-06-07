@@ -14,8 +14,8 @@ on:
         default: '1'
 env:
   REGISTRY_NAME: dtdemos
-  CLUSTER_NAME: jjahn-aks-demo2
-  CLUSTER_RESOURCE_GROUP: jjahn-aks-demo2
+  CLUSTER_NAME: jahn-aks-demo
+  CLUSTER_RESOURCE_GROUP: jahn-aks-demo
   NAMESPACE: dt-orders
   
 jobs:
