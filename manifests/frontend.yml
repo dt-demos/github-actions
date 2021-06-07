@@ -2,13 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  labels:
-    app.kubernetes.io/name: frontend
-    app.kubernetes.io/version: "1"
-    app.kubernetes.io/component: frontend
-    app.kubernetes.io/part-of: dt-orders
-    app.kubernetes.io/managed-by: helm
-    app.kubernetes.io/created-by: dynatrace-demos
 spec:
   replicas: 1
   selector:
@@ -18,8 +11,12 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/part-of: dt-orders
         app.kubernetes.io/name: frontend
+        app.kubernetes.io/version: "1"
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: dt-orders
+        app.kubernetes.io/managed-by: helm
+        app.kubernetes.io/created-by: dynatrace-demos
     spec:
       containers:
       - name: frontend
