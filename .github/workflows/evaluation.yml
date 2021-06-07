@@ -3,10 +3,12 @@ name: SLO Evaluation
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
 env:
-  KEPTN_PROJECT: "dynatrace",
-  KEPTN_SERVICE: "journeyservice",
+  KEPTN_PROJECT: "dynatrace"
+  KEPTN_SERVICE: "journeyservice"
   KEPTN_STAGE: "quality-gate"
+
 jobs:
   slo-evaluation:
     name: Evaluation
