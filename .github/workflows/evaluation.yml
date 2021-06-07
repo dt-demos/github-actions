@@ -3,7 +3,10 @@ name: SLO Evaluation
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+env:
+  KEPTN_PROJECT: "dynatrace",
+  KEPTN_SERVICE: "journeyservice",
+  KEPTN_STAGE: "quality-gate"
 jobs:
   slo-evaluation:
     name: Evaluation
@@ -22,9 +25,9 @@ jobs:
                 "end": "2021-05-01T00:02:00.000Z",
                 "start": "2021-05-01T00:00:00.000Z"
               },
-              "project": "dynatrace",
-              "service": "journeyservice",
-              "stage": "quality-gate"
+              "project": ${{ env.KEPTN_PROJECT }},
+              "service": ${{ env.KEPTN_SERVICE }},
+              "stage": ${{ env.KEPTN_STAGE }}
             },
             "source": "https://keptn.keptn-demo.alliances.dynatracelabs.com",
             "specversion": "1.0",
@@ -33,3 +36,5 @@ jobs:
           }
     - name: Show keptnContext
       run: echo "The keptnContext is ${{ steps.send-keptn-event.outputs.keptnContext }}"
+    - name: Show keptn Bridge URL
+      run: echo "https://${{ secrets.KEPTN_API_URL }}/bridge/evaluation/${{ steps.send-keptn-event.outputs.keptnContext }}/${{ env.KEPTN_STAGE }}"
