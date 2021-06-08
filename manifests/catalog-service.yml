@@ -1,14 +1,5 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: catalog
-  labels:
-    app.kubernetes.io/name: "Xcatalog-service"
-    app.kubernetes.io/version: "X1"
-    app.kubernetes.io/component: "Xservice"
-    app.kubernetes.io/part-of: "Xdt-orders"
-    app.kubernetes.io/managed-by: "Xhelm"
-    app.kubernetes.io/created-by: "Xdynatrace-demos"
 spec:
   replicas: 1
   selector:
