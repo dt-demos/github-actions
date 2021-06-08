@@ -21,4 +21,4 @@ jobs:
       - name: pwd
         run: pwd
       - name: Run Monaco
-        run:  monaco deploy -v --environments monaco/environments.yml --project dt-orders monaco/projects
+        run:  monaco deploy -v --environments ./monaco/environments.yml --project dt-orders ./monaco/projects
