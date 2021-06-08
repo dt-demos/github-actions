@@ -19,9 +19,11 @@ jobs:
       - name: Monaco version
         run: monaco --version 
       - name: List files
-        run: ls -l
+        run: ls -l monaco
       - name: List mount files
         run: ls -l /volume_mount
+      - name: List mount files
+        run: ls -l /__w/github-actions/github-actions
       - name: pwd
         run: pwd
       - name: Run Monaco
