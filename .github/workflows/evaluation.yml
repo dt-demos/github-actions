@@ -32,7 +32,7 @@ jobs:
               "service": ${{ env.KEPTN_SERVICE }},
               "stage": ${{ env.KEPTN_STAGE }}
             },
-            "source": "https://github.com/dt-demos/github-actions/actions/runs/${{ github.job }}",
+            "source": "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}",
             "specversion": "1.0",
             "type": "sh.keptn.event.quality-gate.evaluation.triggered",
             "shkeptnspecversion": "0.2.1" 
