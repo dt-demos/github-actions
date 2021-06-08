@@ -8,8 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: dynatraceace/monaco-runner:release-v1.5.0
-      options: 
-        -v /__w/github-actions/github-actions:/volume_mount/:rw
       env:
         DT_BASEURL: ${{ secrets.DT_URL }}
         DT_API_TOKEN: ${{ secrets.DT_TOKEN }}
@@ -18,13 +16,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Monaco version
         run: monaco --version 
-      - name: List files
-        run: ls -l monaco
-      - name: List mount files
-        run: ls -l /__w/github-actions/github-actions
-      - name: pwd
-        run: pwd
-      - name: view environment file
-        run: cat /__w/github-actions/github-actions/monaco/environments.yml
       - name: Run Monaco
-        run:  monaco deploy -v --environments /__w/github-actions/github-actions/monaco/environments.yml --project dt-orders /__w/github-actions/github-actions/monaco/projects
+        run:  monaco deploy -v --environments ./monaco/environments.yml --project dt-orders ./monaco/projects

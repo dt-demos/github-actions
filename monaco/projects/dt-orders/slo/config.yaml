@@ -4,8 +4,8 @@ config:
 
 monolith-slo:
   - name: "DT-Orders Monolith Error Rate"
-  - mzname: "workshop/management-zone/dt-orders-monolith.name"
+  - mzname: "dt-orders/management-zone/dt-orders-monolith.name"
 
 services-slo:
   - name: "DT-Orders Services Error Rate"
-  - mzname: "workshop/management-zone/dt-orders-services.name"
+  - mzname: "dt-orders/management-zone/dt-orders-services.name"
