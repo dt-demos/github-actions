@@ -15,12 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: dynatraceace/monaco-runner:release-v1.5.0
+      volumes:
+        - my_docker_volume:/volume_mount
       #options: -v /__w/actions-test-repo/actions-test-repo:/zap/wrk/:rw
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Build count
+      - name: Monaco version
         run: monaco --version 
+      - name: List files
+        run: ls -l
+      - name: pwd
+        run: pwd
         
