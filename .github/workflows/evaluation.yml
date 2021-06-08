@@ -8,6 +8,7 @@ env:
   KEPTN_PROJECT: "dynatrace"
   KEPTN_SERVICE: "journeyservice"
   KEPTN_STAGE: "quality-gate"
+  KEPTN_API_URL: "https://ang10000.cloudautomation.live.dynatrace.com"
 
 jobs:
   slo-evaluation:
@@ -18,7 +19,7 @@ jobs:
       id: send-keptn-event
       uses: keptn/gh-action-send-event@feature/keptn-context-as-output
       with:
-        keptnApiUrl: ${{ secrets.KEPTN_API_URL }}
+        keptnApiUrl: ${{ env.KEPTN_API_URL }}
         keptnApiToken: ${{ secrets.KEPTN_API_TOKEN }}
         event: |
           {
@@ -31,7 +32,7 @@ jobs:
               "service": ${{ env.KEPTN_SERVICE }},
               "stage": ${{ env.KEPTN_STAGE }}
             },
-            "source": "https://keptn.keptn-demo.alliances.dynatracelabs.com",
+            "source": "https://github.com/dt-demos/github-actions/actions/runs/${GITHUB_JOB}",
             "specversion": "1.0",
             "type": "sh.keptn.event.quality-gate.evaluation.triggered",
             "shkeptnspecversion": "0.2.1"
@@ -39,4 +40,4 @@ jobs:
     - name: Show keptnContext
       run: echo "The keptnContext is ${{ steps.send-keptn-event.outputs.keptnContext }}"
     - name: Show keptn Bridge URL
-      run: echo "https://${{ secrets.KEPTN_API_URL }}/bridge/evaluation/${{ steps.send-keptn-event.outputs.keptnContext }}/${{ env.KEPTN_STAGE }}"
+      run: echo "https://${{ env.KEPTN_API_URL }}/bridge/evaluation/${{ steps.send-keptn-event.outputs.keptnContext }}/${{ env.KEPTN_STAGE }}"
