@@ -32,10 +32,10 @@ jobs:
               "service": ${{ env.KEPTN_SERVICE }},
               "stage": ${{ env.KEPTN_STAGE }}
             },
-            "source": "https://github.com/dt-demos/github-actions/actions/runs/${GITHUB_JOB}",
+            "source": "https://github.com/dt-demos/github-actions/actions/runs/${{ github.job }}",
             "specversion": "1.0",
             "type": "sh.keptn.event.quality-gate.evaluation.triggered",
-            "shkeptnspecversion": "0.2.1"
+            "shkeptnspecversion": "0.2.1" 
           }
     - name: Show keptnContext
       run: echo "The keptnContext is ${{ steps.send-keptn-event.outputs.keptnContext }}"
