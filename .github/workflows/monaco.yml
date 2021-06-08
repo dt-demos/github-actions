@@ -24,5 +24,7 @@ jobs:
         run: ls -l /__w/github-actions/github-actions
       - name: pwd
         run: pwd
+      - name: view environment file
+        run: cat /__w/github-actions/github-actions/monaco/environments.yml
       - name: Run Monaco
         run:  monaco deploy -v --environments /__w/github-actions/github-actions/monaco/environments.yml --project dt-orders /__w/github-actions/github-actions/monaco/projects
