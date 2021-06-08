@@ -11,6 +11,7 @@ jobs:
       env:
         DT_BASEURL: ${{ secrets.DT_URL }}
         DT_API_TOKEN: ${{ secrets.DT_TOKEN }}
+        NEW_CLI: "1"
     steps:
       - uses: actions/checkout@v2
       - name: Monaco version
@@ -20,4 +21,4 @@ jobs:
       - name: pwd
         run: pwd
       - name: Run Monaco
-        run:  monaco deploy -v --environments ./monaco/environments.yml --project dt-orders ./monaco/projects
+        run:  monaco deploy -v --environments monaco/environments.yml --project dt-orders monaco/projects
