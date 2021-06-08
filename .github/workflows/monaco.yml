@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: dynatraceace/monaco-runner:release-v1.5.0
-      volumes:
-        - /__w/github-actions/github-actions:/volume_mount
+      options: 
+        -v /__w/github-actions/github-actions:/volume_mount/:rw
       env:
         DT_BASEURL: ${{ secrets.DT_URL }}
         DT_API_TOKEN: ${{ secrets.DT_TOKEN }}
@@ -20,6 +20,8 @@ jobs:
         run: monaco --version 
       - name: List files
         run: ls -l
+      - name: List mount files
+        run: ls -l /volume_mount
       - name: pwd
         run: pwd
       - name: Run Monaco
