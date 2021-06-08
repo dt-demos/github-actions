@@ -60,6 +60,7 @@ jobs:
               branch: "${{ github.ref }}"
               event: "${{ github.event_name }}"
               owner: ${{ github.repository_owner }}
+              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.job }}"
     - name: "Deploy customer-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -86,6 +87,7 @@ jobs:
               branch: "${{ github.ref }}"
               event: "${{ github.event_name }}"
               owner: ${{ github.repository_owner }}
+              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.job }}"
     - name: "Deploy catalog-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -112,6 +114,7 @@ jobs:
               branch: "${{ github.ref }}"
               event: "${{ github.event_name }}"
               owner: ${{ github.repository_owner }}
+              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.job }}"
     - name: "Deploy order-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -138,6 +141,7 @@ jobs:
               branch: "${{ github.ref }}"
               event: "${{ github.event_name }}"
               owner: ${{ github.repository_owner }}
+              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.job }}"
     - name: "Deploy load-traffic"
       uses: azure/k8s-deploy@v1.4
       with:
