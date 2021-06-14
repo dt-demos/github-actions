@@ -36,5 +36,6 @@ jobs:
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
     steps:
+      - uses: actions/checkout@v2
       - name: SLO Evaluation
-        run: action.sh sloevaluation
+        run: sloevaluation
