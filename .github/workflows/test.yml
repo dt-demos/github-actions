@@ -29,8 +29,24 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
         
+      - name: Test CUSTOM_DEPLOYMENT
+        uses: dynatrace-oss/dynatrace-github-action@v6
+        with:
+          url: '${{ secrets.DT_URL }}'
+          token: '${{ secrets.DT_TOKEN }}'
+          events: |
+            - type: CUSTOM_DEPLOYMENT
+              source: GitHub
+              deploymentName: "Deploy frontend version 1"
+              deploymentVersion: "1"
+              deploymentProject: "repo"
+              remediationAction: "None"
+              ciBackLink: "https://github.com/dt-demos/"
+              tags:
+                - SERVICE:service:frontend
+                
       - name: Build count
-        uses: dynatrace-oss/dynatrace-github-action@v5
+        uses: dynatrace-oss/dynatrace-github-action@v6
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
@@ -45,7 +61,7 @@ jobs:
 
       # Call the Dynatrace git action
       - name: Dynatrace Info Event
-        uses: dynatrace-oss/dynatrace-github-action@v5
+        uses: dynatrace-oss/dynatrace-github-action@v6
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
