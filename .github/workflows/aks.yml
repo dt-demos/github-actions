@@ -58,6 +58,8 @@ jobs:
             deploymentProject: "${{ github.repository }}"
             remediationAction: "None"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+            tags:
+              - SERVICE:service:frontend
             dimensions:
               project: "dt-orders"
               repository-owner: ${{ github.repository_owner }}
