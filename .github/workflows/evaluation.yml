@@ -35,8 +35,6 @@ jobs:
         END: ${{ env.END }}
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
-      args:
-        - sloevaluation
     steps:
       - name: Monaco version
-        run: .
+        run: ./action.sh sloevaluation
