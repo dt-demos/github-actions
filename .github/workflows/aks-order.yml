@@ -61,7 +61,7 @@ jobs:
             remediationAction: "None"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - PROCESS_GROUP_INSTANCE:service:frontend
+              - SERVICE:service:order
             dimensions:
               project: "dt-orders"
               repository-owner: ${{ github.repository_owner }}
