@@ -30,7 +30,7 @@ jobs:
         run: echo Hello, world!
         
       - name: Test CUSTOM_DEPLOYMENT
-        uses: dynatrace-oss/dynatrace-github-action
+        uses: dynatrace-oss/dynatrace-github-action@v6
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
@@ -101,4 +101,4 @@ jobs:
                 project: "${{ github.repository }}"
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
-              owner: ${{ github.repository_owner }}
+                owner: ${{ github.repository_owner }}
