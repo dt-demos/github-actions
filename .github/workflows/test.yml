@@ -43,7 +43,7 @@ jobs:
               remediationAction: "None"
               ciBackLink: "https://github.com/dt-demos/"
               tags:
-                - SERVICE:service:frontend
+                - SERVICE:TEST
                 
       - name: Build count
         uses: dynatrace-oss/dynatrace-github-action@v6
