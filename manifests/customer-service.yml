@@ -25,6 +25,10 @@ spec:
         ports:
         - containerPort: 8080
           name: cust-service
+        env:
+        - name: DT_CUSTOM_PROP
+          value: "project=dt-orders service=customer stage=dev"
+        
 ---
 apiVersion: v1
 kind: Service

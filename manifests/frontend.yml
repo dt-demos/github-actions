@@ -25,6 +25,9 @@ spec:
         ports:
         - containerPort: 8080
           name: frontend
+        env:
+        - name: DT_CUSTOM_PROP
+          value: "project=dt-orders service=frontend stage=dev"
 ---
 apiVersion: v1
 kind: Service
