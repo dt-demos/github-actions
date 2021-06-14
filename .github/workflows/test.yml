@@ -38,7 +38,9 @@ jobs:
           events: |
             - type: CUSTOM_DEPLOYMENT
               source: GitHub
-              deploymentName: "GitHub Action"
+              deploymentName: "CUSTOM_DEPLOYMENT deploymentName"
+              deploymentProject: "CUSTOM_DEPLOYMENT deploymentProject"
+              remediationAction: "CUSTOM_DEPLOYMENT remediationAction"
               deploymentVersion: "123"
               entities:
                 - SERVICE-661D74E40E3C3655
