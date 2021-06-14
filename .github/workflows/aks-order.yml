@@ -53,18 +53,20 @@ jobs:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy order-service version ${{ github.event.inputs.order-version }}"
-            type: CUSTOM_INFO
-            description: "Deploy order-service version ${{ github.event.inputs.order-version }}"
+          - type: CUSTOM_DEPLOYMENT
             source: GitHub
+            deploymentName: "Deploy frontend version ${{ github.event.inputs.order-version }}"
+            deploymentVersion: "${{ github.event.inputs.order-version }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - SERVICE:service:order
+              - PROCESS_GROUP_INSTANCE:service:frontend
             dimensions:
-              project: "${{ github.repository }}"
-              branch: "${{ github.ref }}"
-              event: "${{ github.event_name }}"
-              owner: ${{ github.repository_owner }}
-              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
 
   config:
     runs-on: ubuntu-latest
