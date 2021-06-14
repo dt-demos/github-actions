@@ -57,10 +57,11 @@ jobs:
             source: GitHub
             deploymentName: "Deploy order version ${{ github.event.inputs.order-version }}"
             deploymentVersion: "${{ github.event.inputs.order-version }}"
+            deploymentProject: "dt-orders"
             tags:
               - PROCESS_GROUP_INSTANCE:service:order
             dimensions:
-              project: "dt-orders"
+              project: "${{ github.repository }}"
               repository-owner: ${{ github.repository_owner }}
               repository: "https://github.com/${{ github.repository }}"
               repository-branch: "${{ github.ref }}"
