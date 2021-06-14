@@ -41,6 +41,7 @@ jobs:
               deploymentName: "CUSTOM_DEPLOYMENT deploymentName"
               deploymentProject: "CUSTOM_DEPLOYMENT deploymentProject"
               remediationAction: "CUSTOM_DEPLOYMENT remediationAction"
+              ciBackLink: "CUSTOM_DEPLOYMENT ciBackLink"
               deploymentVersion: "123"
               entities:
                 - SERVICE-661D74E40E3C3655
