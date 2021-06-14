@@ -38,4 +38,5 @@ jobs:
       args:
         - sloevaluation
     steps:
-      - run:
+      - name: Monaco version
+        run: .
