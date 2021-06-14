@@ -39,4 +39,3 @@ jobs:
         - sloevaluation
     steps:
       - uses: actions/checkout@v2
-      - name: SLO Evaluation
