@@ -41,10 +41,12 @@ jobs:
               deploymentName: "CUSTOM_DEPLOYMENT deploymentName"
               deploymentProject: "CUSTOM_DEPLOYMENT deploymentProject"
               remediationAction: "CUSTOM_DEPLOYMENT remediationAction"
-              ciBackLink: "CUSTOM_DEPLOYMENT ciBackLink"
+              ciBackLink: "https://www.dyntrace.com"
               deploymentVersion: "123"
               entities:
                 - SERVICE-661D74E40E3C3655
+              dimensions:
+                project: "dt-orders"
 
       - name: Test CUSTOM_INFO
         uses: dynatrace-oss/dynatrace-github-action@v7
