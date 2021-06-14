@@ -31,7 +31,7 @@ jobs:
         run: echo Hello, world!
         
       - name: Test CUSTOM_DEPLOYMENT
-        uses: dynatrace-oss/dynatrace-github-action@v6
+        uses: dynatrace-oss/dynatrace-github-action@v7
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
@@ -44,7 +44,7 @@ jobs:
                 - SERVICE-661D74E40E3C3655
 
       - name: Test CUSTOM_INFO
-        uses: dynatrace-oss/dynatrace-github-action@v6
+        uses: dynatrace-oss/dynatrace-github-action@v7
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
@@ -57,7 +57,7 @@ jobs:
                 - SERVICE:TEST
                 
       - name: Build count
-        uses: dynatrace-oss/dynatrace-github-action@v6
+        uses: dynatrace-oss/dynatrace-github-action@v7
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'
@@ -72,7 +72,7 @@ jobs:
 
       # Call the Dynatrace git action
       - name: Dynatrace Info Event
-        uses: dynatrace-oss/dynatrace-github-action@v6
+        uses: dynatrace-oss/dynatrace-github-action@v7
         with:
           url: '${{ secrets.DT_URL }}'
           token: '${{ secrets.DT_TOKEN }}'

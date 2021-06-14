@@ -48,7 +48,7 @@ jobs:
           ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.customer-version }}
 
     - name: "Dynatrace Deployment Event Order Service"
-      uses: dynatrace-oss/dynatrace-github-action@v6
+      uses: dynatrace-oss/dynatrace-github-action@v7
       with:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
