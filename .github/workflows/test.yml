@@ -47,6 +47,9 @@ jobs:
                 - SERVICE-661D74E40E3C3655
               dimensions:
                 project: "dt-orders"
+                repository-owner: ${{ github.repository_owner }}
+                repository: "https://github.com/${{ github.repository }}"
+                repository-branch: "${{ github.ref }}"
 
       - name: Test CUSTOM_INFO
         uses: dynatrace-oss/dynatrace-github-action@v7
