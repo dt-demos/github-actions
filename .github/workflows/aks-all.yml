@@ -20,7 +20,7 @@ env:
   REGISTRY_NAME: dtdemos
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
-  NAMESPACE: dt-orders
+  NAMESPACE: dev
   FRONTEND_VERSION: 1
   CATALOG_VERSION: 1
 
