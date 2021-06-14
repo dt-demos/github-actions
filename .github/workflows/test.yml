@@ -43,8 +43,8 @@ jobs:
               remediationAction: "CUSTOM_DEPLOYMENT remediationAction"
               ciBackLink: "https://www.dyntrace.com"
               deploymentVersion: "123"
-              entities:
-                - SERVICE-661D74E40E3C3655
+              tags:
+                - PROCESS_GROUP_INSTANCE:service:order
               dimensions:
                 project: "dt-orders"
                 repository-owner: ${{ github.repository_owner }}
@@ -62,7 +62,7 @@ jobs:
               description: "CUSTOM_INFO description"
               source: GitHub
               tags:
-                - SERVICE:TEST
+                - PROCESS_GROUP_INSTANCE:service:order
                 
       - name: Build count
         uses: dynatrace-oss/dynatrace-github-action@v7

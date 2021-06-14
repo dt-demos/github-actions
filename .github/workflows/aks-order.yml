@@ -55,13 +55,13 @@ jobs:
         events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
-            deploymentName: "Deploy frontend version ${{ github.event.inputs.order-version }}"
+            deploymentName: "Deploy order version ${{ github.event.inputs.order-version }}"
             deploymentVersion: "${{ github.event.inputs.order-version }}"
             deploymentProject: "${{ github.repository }}"
             remediationAction: "None"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - SERVICE:service:order
+              - PROCESS_GROUP_INSTANCE:service:order
             dimensions:
               project: "dt-orders"
               repository-owner: ${{ github.repository_owner }}
