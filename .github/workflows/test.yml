@@ -38,8 +38,7 @@ jobs:
             - type: CUSTOM_DEPLOYMENT
               source: GitHub
               deploymentName: "GitHub Action"
-              deploymentVersion: "${{ github.ref }}"
-              deploymentProject: "${{ github.repository }}"
+              deploymentVersion: "123"
               entities:
                 - SERVICE-661D74E40E3C3655
 
