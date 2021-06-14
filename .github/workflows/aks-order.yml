@@ -1,0 +1,82 @@
+# requires the following secrets:
+# DT_URL
+# DT_TOKEN 
+# AZURE_CREDENTIALS
+
+name: Deploy Order Service
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      order-version:
+        description: 'Order Service Version'     
+        required: true
+        default: '1'
+env:
+  REGISTRY_NAME: dtdemos
+  CLUSTER_NAME: jahn-aks-demo
+  CLUSTER_RESOURCE_GROUP: jahn-aks-demo
+  NAMESPACE: dt-orders
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Get code from github repo"
+      uses: actions/checkout@master
+
+    - name: "Set the target AKS cluster"
+      uses: azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+
+    - name: "Create namespace if doesn't exist"
+      run: |
+        kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
+
+    - name: "Deploy order-service"
+      uses: azure/k8s-deploy@v1.4
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        action: deploy
+        manifests: |
+          manifests/order-service.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.customer-version }}
+
+    - name: "Dynatrace Deployment Event Order Service"
+      uses: dynatrace-oss/dynatrace-github-action@v6
+      with:
+        url: '${{ secrets.DT_URL }}'
+        token: '${{ secrets.DT_TOKEN }}'
+        events: |
+          - title: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
+            type: CUSTOM_INFO
+            description: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
+            source: GitHub
+            tags:
+              - SERVICE:service:order
+            dimensions:
+              project: "${{ github.repository }}"
+              branch: "${{ github.ref }}"
+              event: "${{ github.event_name }}"
+              owner: ${{ github.repository_owner }}
+              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+
+  config:
+    runs-on: ubuntu-latest
+    container:
+      image: dynatraceace/monaco-runner:release-v1.5.0
+      env:
+        DT_BASEURL: ${{ secrets.DT_URL }}
+        DT_API_TOKEN: ${{ secrets.DT_TOKEN }}
+        NEW_CLI: "1"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Monaco version
+        run: monaco --version 
+      - name: Run Monaco
+        run:  monaco deploy -v --environments ./monaco/environments.yml --project dt-orders ./monaco/projects

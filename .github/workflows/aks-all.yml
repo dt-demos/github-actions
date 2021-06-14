@@ -1,5 +1,9 @@
-name: Deploy to AKS
+# requires the following secrets:
+# DT_URL
+# DT_TOKEN 
+# AZURE_CREDENTIALS
 
+name: Deploy all
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,6 +40,7 @@ jobs:
     - name: "Create namespace if doesn't exist"
       run: |
         kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
+
     - name: "Deploy frontend"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -44,7 +49,8 @@ jobs:
         manifests: |
           manifests/frontend.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1
+          ${{ env.REGISTRY_NAME }}/dt-orders-frontend:${{ env.FRONTEND_VERSION }}
+
     - name: "Dynatrace Deployment Event frontend"
       uses: dynatrace-oss/dynatrace-github-action@v6
       with:
@@ -65,6 +71,7 @@ jobs:
               repository-owner: ${{ github.repository_owner }}
               repository: "https://github.com/${{ github.repository }}"
               repository-branch: "${{ github.ref }}"
+
     - name: "Deploy customer-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -74,24 +81,28 @@ jobs:
           manifests/customer-service.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:${{ github.event.inputs.customer-version }}
+
     - name: "Dynatrace Deployment Event Customer Service"
       uses: dynatrace-oss/dynatrace-github-action@v6
       with:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy customer-service version ${{ github.event.inputs.customer-version }}"
-            type: CUSTOM_INFO
-            description: "Deploy customer-service version ${{ github.event.inputs.customer-version }}"
+          - type: CUSTOM_DEPLOYMENT
             source: GitHub
+            deploymentName: "Deploy frontend version ${{ github.event.inputs.customer-version }}"
+            deploymentVersion: "${{ github.event.inputs.customer-version }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - SERVICE:service:customer
+              - PROCESS_GROUP_INSTANCE:service:frontend
             dimensions:
-              project: "${{ github.repository }}"
-              branch: "${{ github.ref }}"
-              event: "${{ github.event_name }}"
-              owner: ${{ github.repository_owner }}
-              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
+
     - name: "Deploy catalog-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -100,16 +111,17 @@ jobs:
         manifests: |
           manifests/catalog-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:1
+          ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:${{ env.CATALOG_VERSION }}
+
     - name: "Dynatrace Deployment Event Catalog Service"
       uses: dynatrace-oss/dynatrace-github-action@v6
       with:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy catalog-service version 1"
+          - title: "Deploy catalog-service version ${{ env.CATALOG_VERSION }}"
             type: CUSTOM_INFO
-            description: "Deploy catalog-service version 1"
+            description: "Deploy catalog-service version ${{ env.CATALOG_VERSION }}"
             source: GitHub
             tags:
               - SERVICE:service:catalog
@@ -119,6 +131,7 @@ jobs:
               event: "${{ github.event_name }}"
               owner: ${{ github.repository_owner }}
               github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+
     - name: "Deploy order-service"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -127,25 +140,29 @@ jobs:
         manifests: |
           manifests/order-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.customer-version }}
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.order-version }}
+
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v6
       with:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
-            type: CUSTOM_INFO
-            description: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
+          - type: CUSTOM_DEPLOYMENT
             source: GitHub
+            deploymentName: "Deploy frontend version ${{ github.event.inputs.order-version }}"
+            deploymentVersion: "${{ github.event.inputs.order-version }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - SERVICE:service:order
+              - PROCESS_GROUP_INSTANCE:service:frontend
             dimensions:
-              project: "${{ github.repository }}"
-              branch: "${{ github.ref }}"
-              event: "${{ github.event_name }}"
-              owner: ${{ github.repository_owner }}
-              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
+
     - name: "Deploy load-traffic"
       uses: azure/k8s-deploy@v1.4
       with:
@@ -155,6 +172,7 @@ jobs:
           manifests/load-traffic.yml
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-load:1
+
     - name: "Deploy browser-traffic"
       uses: azure/k8s-deploy@v1.4
       with:

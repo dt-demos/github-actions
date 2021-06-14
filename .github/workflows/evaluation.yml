@@ -1,43 +1,40 @@
-name: SLO Evaluation
+# requires the following secrets:
+# KEPTN_API_TOKEN 
 
+name: SLO Evaluation
 on:
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
-  KEPTN_PROJECT: "dynatrace"
-  KEPTN_SERVICE: "journeyservice"
-  KEPTN_STAGE: "quality-gate"
-  KEPTN_API_URL: "https://ang10000.cloudautomation.live.dynatrace.com"
+  EVALUATION_RULE: pass_on_warning
+  KEPTN_BASE_URL: https://ang10000.cloudautomation.live.dynatrace.com
+  KEPTN_PROJECT: dt-orders
+  KEPTN_SERVICE: catalog
+  KEPTN_STAGE: dev
+  LABELS: "runId: ${{ github.run_id }},executedBy: GitHub, Job: https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"            
+  START: "2021-06-09T21:00:00"
+  END: "2021-06-09T22:00:00"
+  TIMEFRAME: 5m
+  DEBUG: "false"
 
 jobs:
-  slo-evaluation:
-    name: Evaluation
+  build:
     runs-on: ubuntu-latest
+    container:
+      image: dtdemos/keptn-automation:1
+      env:
+        EVALUATION_RULE: ${{ env.EVALUATION_RULE }}
+        KEPTN_BASE_URL: ${{ env.KEPTN_BASE_URL }}
+        KEPTN_API_TOKEN: ${{ secrets.KEPTN_API_TOKEN }}
+        KEPTN_PROJECT: ${{ env.KEPTN_PROJECT }}
+        KEPTN_SERVICE: ${{ env.KEPTN_SERVICE }}
+        KEPTN_STAGE: ${{ env.KEPTN_STAGE }}
+        SOURCE: ${{ env.SOURCE }}
+        LABELS: ${{ env.LABELS }}
+        START: ${{ env.START }}
+        END: ${{ env.END }}
+        TIMEFRAME: ${{ env.TIMEFRAME }}
+        DEBUG: ${{ env.DEBUG }}
     steps:
-    - name: Send Keptn Event
-      id: send-keptn-event
-      uses: keptn/gh-action-send-event@feature/keptn-context-as-output
-      with:
-        keptnApiUrl: ${{ env.KEPTN_API_URL }}
-        keptnApiToken: ${{ secrets.KEPTN_API_TOKEN }}
-        event: |
-          {
-            "data": {
-              "evaluation": {
-                "end": "2021-05-01T00:02:00.000Z",
-                "start": "2021-05-01T00:00:00.000Z"
-              },
-              "project": ${{ env.KEPTN_PROJECT }},
-              "service": ${{ env.KEPTN_SERVICE }},
-              "stage": ${{ env.KEPTN_STAGE }}
-            },
-            "source": "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}",
-            "specversion": "1.0",
-            "type": "sh.keptn.event.quality-gate.evaluation.triggered",
-            "shkeptnspecversion": "0.2.1" 
-          }
-    - name: Show keptnContext
-      run: echo "The keptnContext is ${{ steps.send-keptn-event.outputs.keptnContext }}"
-    - name: Show keptn Bridge URL
-      run: echo "https://${{ env.KEPTN_API_URL }}/bridge/evaluation/${{ steps.send-keptn-event.outputs.keptnContext }}/${{ env.KEPTN_STAGE }}"
+      - name: SLO Evaluation
+        run:  sloevaluation

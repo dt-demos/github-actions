@@ -1,4 +1,6 @@
-# This is a basic workflow to help you get started with Actions
+# requires the following secrets:
+# DT_URL
+# DT_TOKEN 
 
 name: Monaco Test
 on:
@@ -14,7 +16,9 @@ jobs:
         NEW_CLI: "1"
     steps:
       - uses: actions/checkout@v2
+      
       - name: Monaco version
         run: monaco --version 
+
       - name: Run Monaco
         run:  monaco deploy -v --environments ./monaco/environments.yml --project dt-orders ./monaco/projects
