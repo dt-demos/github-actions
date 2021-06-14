@@ -57,9 +57,6 @@ jobs:
             source: GitHub
             deploymentName: "Deploy order version ${{ github.event.inputs.order-version }}"
             deploymentVersion: "${{ github.event.inputs.order-version }}"
-            deploymentProject: "${{ github.repository }}"
-            remediationAction: "None"
-            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
               - PROCESS_GROUP_INSTANCE:service:order
             dimensions:
@@ -67,7 +64,6 @@ jobs:
               repository-owner: ${{ github.repository_owner }}
               repository: "https://github.com/${{ github.repository }}"
               repository-branch: "${{ github.ref }}"
-
   config:
     runs-on: ubuntu-latest
     container:
