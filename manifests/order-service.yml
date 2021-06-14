@@ -17,6 +17,9 @@ spec:
         app.kubernetes.io/part-of: dt-orders
         app.kubernetes.io/managed-by: helm
         app.kubernetes.io/created-by: dynatrace-demos
+      annotations:
+        project: dt-orders
+        service: order
     spec:
       containers:
       - name: order
@@ -27,7 +30,7 @@ spec:
           name: order-service
         env:
         - name: DT_CUSTOM_PROP
-          value: "project=dt-orders service=order stage=dev"
+          value: "project=dt-orders service=order"
 ---
 apiVersion: v1
 kind: Service

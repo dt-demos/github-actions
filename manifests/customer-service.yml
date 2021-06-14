@@ -17,6 +17,9 @@ spec:
         app.kubernetes.io/part-of: dt-orders
         app.kubernetes.io/managed-by: helm
         app.kubernetes.io/created-by: dynatrace-demos
+      annotations:
+        project: dt-orders
+        service: customer
     spec:
       containers:
       - name: customer
@@ -27,7 +30,7 @@ spec:
           name: cust-service
         env:
         - name: DT_CUSTOM_PROP
-          value: "project=dt-orders service=customer stage=dev"
+          value: "project=dt-orders service=customer"
         
 ---
 apiVersion: v1
