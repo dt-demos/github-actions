@@ -35,7 +35,7 @@ jobs:
         END: ${{ env.END }}
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
-      options:
+      args:
         - sloevaluation
     steps:
-      - uses: actions/checkout@v2
+      - run:
