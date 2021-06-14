@@ -37,4 +37,4 @@ jobs:
         DEBUG: ${{ env.DEBUG }}
     steps:
       - name: SLO Evaluation
-        run:  sloevaluation
+        run: action.sh sloevaluation
