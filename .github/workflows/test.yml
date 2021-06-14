@@ -37,13 +37,18 @@ jobs:
           events: |
             - type: CUSTOM_DEPLOYMENT
               source: GitHub
-              deploymentName: "Deploy frontend version 1"
-              deploymentVersion: "1"
-              deploymentProject: "repo"
+              deploymentName: "GitHub Action"
+              deploymentVersion: "${{ github.ref }}"
+              deploymentProject: "${{ github.repository }}"
               remediationAction: "None"
-              ciBackLink: "https://github.com/dt-demos/"
+              ciBackLink: "https://github.com/${{ github.repository }}"
               entities:
                 - SERVICE-661D74E40E3C3655
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: rob
 
       - name: Test CUSTOM_INFO
         uses: dynatrace-oss/dynatrace-github-action@v6
@@ -55,8 +60,8 @@ jobs:
               type: CUSTOM_INFO
               description: "CUSTOM_INFO description"
               source: GitHub
-              entities:
-                - SERVICE-661D74E40E3C3655
+              tags:
+                - SERVICE:TEST
                 
       - name: Build count
         uses: dynatrace-oss/dynatrace-github-action@v6
