@@ -42,8 +42,8 @@ jobs:
               deploymentProject: "repo"
               remediationAction: "None"
               ciBackLink: "https://github.com/dt-demos/"
-              tags:
-                - SERVICE:TEST
+              entities:
+                - SERVICE-661D74E40E3C3655
                 
       - name: Build count
         uses: dynatrace-oss/dynatrace-github-action@v6
