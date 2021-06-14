@@ -45,7 +45,7 @@ jobs:
         manifests: |
           manifests/order-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.customer-version }}
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.order-version }}
 
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v7
@@ -53,9 +53,9 @@ jobs:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
+          - title: "Deploy order-service version ${{ github.event.inputs.order-version }}"
             type: CUSTOM_INFO
-            description: "Deploy order-service version ${{ github.event.inputs.customer-version }}"
+            description: "Deploy order-service version ${{ github.event.inputs.order-version }}"
             source: GitHub
             tags:
               - SERVICE:service:order
