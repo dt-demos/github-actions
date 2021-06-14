@@ -17,7 +17,9 @@ env:
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
   NAMESPACE: dt-orders
-  
+  FRONTEND_VERSION: 1
+  CATALOG_VERSION: 1
+
 jobs:
   setup-build-publish-deploy:
     name: Deploy
@@ -44,23 +46,23 @@ jobs:
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-frontend:1
     - name: "Dynatrace Deployment Event frontend"
-      uses: dynatrace-oss/dynatrace-github-action@v5
+      uses: dynatrace-oss/dynatrace-github-action@v6
       with:
         url: '${{ secrets.DT_URL }}'
         token: '${{ secrets.DT_TOKEN }}'
         events: |
-          - title: "Deploy frontend version 1"
-            type: CUSTOM_INFO
-            description: "Deploy frontend version 1"
+          - type: CUSTOM_DEPLOYMENT
             source: GitHub
-            tags:
-              - SERVICE:service:frontend
+            deploymentName: "Deploy frontend version ${{ env.FRONTEND_VERSION }}"
+            deploymentVersion: "${{ env.FRONTEND_VERSION }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             dimensions:
-              project: "${{ github.repository }}"
-              branch: "${{ github.ref }}"
-              event: "${{ github.event_name }}"
-              owner: ${{ github.repository_owner }}
-              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
     - name: "Deploy customer-service"
       uses: azure/k8s-deploy@v1.4
       with:
