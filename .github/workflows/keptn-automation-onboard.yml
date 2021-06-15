@@ -1,0 +1,49 @@
+# requires the following secrets:
+# KEPTN_API_URL
+# KEPTN_API_TOKEN
+# DT_BASE_URL
+# DT_API_TOKEN
+
+name: Keptn Onboard Service
+on:
+  workflow_dispatch:
+
+env:
+  KEPTN_PROJECT: dt-orders
+  KEPTN_SERVICE: catalog
+  KEPTN_STAGE: dev
+  KEPTN_SHIPYARD_FILE: ./keptn/shipyard.yaml
+  KEPTN_SLO_FILE: ./keptn/slo.yaml
+  CONFIGURE_DT_MONITORING: true
+  DT_CONF_FILE: ./keptn/dynatrace.conf.yaml
+  DT_SLI_FILE: ./keptn/sli.yaml
+  DEBUG: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: dtdemos/keptn-automation:1
+      env:
+        KEPTN_BASE_URL: ${{ secrets.KEPTN_BASE_URL }}
+        KEPTN_API_TOKEN: ${{ secrets.KEPTN_API_TOKEN }}
+        KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
+        KEPTN_PROJECT: ${{ env.KEPTN_PROJECT }}
+        KEPTN_SERVICE: ${{ env.KEPTN_SERVICE }}
+        KEPTN_STAGE: ${{ env.KEPTN_STAGE }}
+        CONFIGURE_DT_MONITORING: ${{ env.CONFIGURE_DT_MONITORING }}
+        DT_CONF_FILE: ${{ env.DT_CONF_FILE }}
+        DT_BASE_URL: ${{ secrets.DT_BASE_URL }}
+        DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
+        DEBUG: ${{ env.DEBUG }}
+        
+    steps:
+      # github automatically creates a volume to the checked out code
+      # so we can reference them via ./foldername
+      - uses: actions/checkout@v2
+
+      - name: createdynatracesecret
+        run: create-dynatrace-secret.sh
+
+      - name: keptn onboardservice
+        run: onboard-service.sh
