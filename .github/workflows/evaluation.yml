@@ -36,5 +36,9 @@ jobs:
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
     steps:
+      - name: ls
+        run: ls -l
+      - name: pwd
+        run: pwd
       - name: SLO Evaluation
         run: action.sh sloevaluation
