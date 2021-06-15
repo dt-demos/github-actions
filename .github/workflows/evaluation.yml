@@ -40,4 +40,4 @@ jobs:
       - name: ls
         run: ls -l /keptn
       - name: SLO Evaluation
-        run: action.sh sloevaluation
+        run: cd /keptn && ./action.sh sloevaluation
