@@ -38,7 +38,6 @@ jobs:
                 repository: "https://github.com/${{ github.repository }}"
                 repository-branch: "${{ github.ref }}"
 
-          events: |
             - type: CUSTOM_DEPLOYMENT
               source: GitHub
               deploymentName: "CUSTOM_DEPLOYMENT deploymentName to PROCESS_GROUP_INSTANCE"
@@ -54,7 +53,6 @@ jobs:
                 repository: "https://github.com/${{ github.repository }}"
                 repository-branch: "${{ github.ref }}"
 
-          events: |
             - title: "CUSTOM_INFO title"
               type: CUSTOM_INFO
               description: "CUSTOM_INFO description"
@@ -71,7 +69,6 @@ jobs:
                 event: "${{ github.event_name }}"
                 owner: "${{ github.repository_owner }}"
 
-          metrics: |
             - metric: "github.build.total"
               value: "1.0"
               dimensions:
