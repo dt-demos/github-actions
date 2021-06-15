@@ -35,6 +35,8 @@ jobs:
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
     steps:
-      - uses: actions/checkout@v2
+      #- uses: actions/checkout@v2
+      - name: keptn get project
+        run: cd /keptn && ./action.sh keptn get project
       - name: SLO Evaluation
         run: cd /keptn && ./action.sh sloevaluation
