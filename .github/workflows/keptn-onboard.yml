@@ -11,8 +11,8 @@ env:
   KEPTN_STAGE: dev
   DEBUG: true
   CONFIGURE_DT_MONITORING: true
-  KEPTN_SHIPYARD_FILE: /keptn/shipyard.yaml
-  DT_CONF_FILE: /keptn/dynatrace.conf.yaml
+  KEPTN_SHIPYARD_FILE: ./keptn/shipyard.yaml
+  DT_CONF_FILE: ./keptn/dynatrace.conf.yaml
 
 jobs:
   build:
