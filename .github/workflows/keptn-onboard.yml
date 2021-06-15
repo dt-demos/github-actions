@@ -9,10 +9,10 @@ env:
   KEPTN_PROJECT: dt-orders
   KEPTN_SERVICE: catalog
   KEPTN_STAGE: dev
-  DEBUG: "true"
+  DEBUG: true
   CONFIGURE_DT_MONITORING: true
-  KEPTN_SHIPYARD_FILE: keptn/shipyard.yaml
-  DT_CONF_FILE: keptn/dynatrace.conf.yaml
+  KEPTN_SHIPYARD_FILE: /__w/github-actions/github-actions/keptn/shipyard.yaml
+  DT_CONF_FILE: /__w/github-actions/github-actions/keptn/dynatrace.conf.yaml
 
 jobs:
   build:
@@ -31,6 +31,8 @@ jobs:
         DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
         KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
         DEBUG: ${{ env.DEBUG }}
+      volumes:
+        - /home/runner/work/_temp/_github_workflows:/mount
 
     steps:
       # github automatically creates a volume to the checked out code
@@ -38,10 +40,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: pwd
-        run: pwd
-
-      - name: ls
-        run: ls -l
+        run: /__w/github-actions/github-actions
 
       - name: cat KEPTN_SHIPYARD_FILE
         run: cat $KEPTN_SHIPYARD_FILE
