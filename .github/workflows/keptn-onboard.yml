@@ -31,7 +31,7 @@ jobs:
         DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
         KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
         DEBUG: ${{ env.DEBUG }}
-
+        
     steps:
       # github automatically creates a volume to the checked out code
       # so we can reference them via ./foldername
@@ -44,7 +44,7 @@ jobs:
         run: cat $KEPTN_SHIPYARD_FILE
 
       - name: createdynatracesecret
-        run: cd /keptn && ./action.sh createdynatracesecret
+        run: action.sh createdynatracesecret
 
       - name: keptn onboardservice
-        run: cd /keptn && ./action.sh onboardservice
+        run: action.sh onboardservice
