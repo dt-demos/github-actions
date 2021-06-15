@@ -45,8 +45,8 @@ jobs:
       - name: ls
         run: ls -l /mount
 
-      - name: ls keptn
-        run: ls -l /mount/keptn
+      #- name: ls keptn
+      #  run: ls -l /mount/keptn
 
       - name: createdynatracesecret
         run: cd /keptn && ./action.sh createdynatracesecret
