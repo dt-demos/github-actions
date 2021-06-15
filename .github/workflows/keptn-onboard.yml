@@ -32,7 +32,7 @@ jobs:
         KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
         DEBUG: ${{ env.DEBUG }}
       volumes:
-        - $(pwd):/mount
+        - /home/runner/work/_temp/_github_workflow:/mount
 
     steps:
       # github automatically creates a volume to the checked out code
