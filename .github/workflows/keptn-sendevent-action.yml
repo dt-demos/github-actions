@@ -1,4 +1,5 @@
 # requires the following secrets:
+# KEPTN_API_URL
 # KEPTN_API_TOKEN 
 
 name: SLO Evaluation Action
@@ -10,7 +11,6 @@ env:
   KEPTN_PROJECT: "dynatrace"
   KEPTN_SERVICE: "journeyservice"
   KEPTN_STAGE: "quality-gate"
-  KEPTN_API_URL: "https://ang10000.cloudautomation.live.dynatrace.com"
 
 jobs:
   slo-evaluation:
@@ -21,7 +21,7 @@ jobs:
       id: send-keptn-event
       uses: keptn/gh-action-send-event@feature/keptn-context-as-output
       with:
-        keptnApiUrl: ${{ env.KEPTN_API_URL }}
+        keptnApiUrl: ${{ secrets.KEPTN_API_URL }}
         keptnApiToken: ${{ secrets.KEPTN_API_TOKEN }}
         event: |
           {
