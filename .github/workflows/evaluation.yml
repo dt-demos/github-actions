@@ -12,10 +12,10 @@ env:
   KEPTN_SERVICE: catalog
   KEPTN_STAGE: dev
   LABELS: "runId: ${{ github.run_id }},executedBy: GitHub, Job: https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"            
-  START: "2021-06-09T21:00:00"
-  END: "2021-06-09T22:00:00"
+  #START: "2021-06-09T21:00:00"
+  #END: "2021-06-09T22:00:00"
   TIMEFRAME: 5m
-  DEBUG: "false"
+  DEBUG: true
 
 jobs:
   build:
@@ -31,10 +31,10 @@ jobs:
         KEPTN_STAGE: ${{ env.KEPTN_STAGE }}
         SOURCE: ${{ env.SOURCE }}
         LABELS: ${{ env.LABELS }}
-        START: ${{ env.START }}
-        END: ${{ env.END }}
+        #START: ${{ env.START }}
+        #END: ${{ env.END }}
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
     steps:
       - name: SLO Evaluation
-        run: /action.sh sloevaluation
+        run: action.sh sloevaluation
