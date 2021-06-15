@@ -7,7 +7,6 @@ on:
 
 env:
   EVALUATION_RULE: pass_on_warning
-  KEPTN_BASE_URL: https://ang10000.cloudautomation.live.dynatrace.com
   KEPTN_PROJECT: dt-orders
   KEPTN_SERVICE: catalog
   KEPTN_STAGE: dev
@@ -24,7 +23,7 @@ jobs:
       image: dtdemos/keptn-automation:1
       env:
         EVALUATION_RULE: ${{ env.EVALUATION_RULE }}
-        KEPTN_BASE_URL: ${{ env.KEPTN_BASE_URL }}
+        KEPTN_BASE_URL: ${{ secrets.KEPTN_BASE_URL }}
         KEPTN_API_TOKEN: ${{ secrets.KEPTN_API_TOKEN }}
         KEPTN_PROJECT: ${{ env.KEPTN_PROJECT }}
         KEPTN_SERVICE: ${{ env.KEPTN_SERVICE }}
@@ -37,7 +36,5 @@ jobs:
         DEBUG: ${{ env.DEBUG }}
     steps:
       - uses: actions/checkout@v2
-      - name: ls
-        run: ls -l /keptn
       - name: SLO Evaluation
         run: cd /keptn && ./action.sh sloevaluation
