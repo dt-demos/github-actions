@@ -1,6 +1,6 @@
 # requires the following secrets:
-# DT_URL
-# DT_TOKEN 
+# DT_BASE_URL
+# DT_API_TOKEN 
 
 name: Test Dynatrace OSS Action
 on:
@@ -20,8 +20,8 @@ jobs:
       - name: Test CUSTOM_DEPLOYMENT
         uses: dynatrace-oss/dynatrace-github-action@v7
         with:
-          url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_TOKEN }}'
+          url: '${{ secrets.DT_BASE_URL }}'
+          token: '${{ secrets.DT_API_TOKEN }}'
           events: |
             - type: CUSTOM_DEPLOYMENT
               source: GitHub

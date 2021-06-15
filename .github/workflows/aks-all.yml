@@ -1,6 +1,6 @@
 # requires the following secrets:
-# DT_URL
-# DT_TOKEN 
+# DT_BASE_URL
+# DT_API_TOKEN 
 # AZURE_CREDENTIALS
 
 name: Deploy all
@@ -54,8 +54,8 @@ jobs:
     - name: "Dynatrace Deployment Event frontend"
       uses: dynatrace-oss/dynatrace-github-action@v7
       with:
-        url: '${{ secrets.DT_URL }}'
-        token: '${{ secrets.DT_TOKEN }}'
+        url: '${{ secrets.DT_BASE_URL }}'
+        token: '${{ secrets.DT_API_TOKEN }}'
         events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
@@ -85,8 +85,8 @@ jobs:
     - name: "Dynatrace Deployment Event Customer Service"
       uses: dynatrace-oss/dynatrace-github-action@v7
       with:
-        url: '${{ secrets.DT_URL }}'
-        token: '${{ secrets.DT_TOKEN }}'
+        url: '${{ secrets.DT_BASE_URL }}'
+        token: '${{ secrets.DT_API_TOKEN }}'
         events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
@@ -116,8 +116,8 @@ jobs:
     - name: "Dynatrace Deployment Event Catalog Service"
       uses: dynatrace-oss/dynatrace-github-action@v7
       with:
-        url: '${{ secrets.DT_URL }}'
-        token: '${{ secrets.DT_TOKEN }}'
+        url: '${{ secrets.DT_BASE_URL }}'
+        token: '${{ secrets.DT_API_TOKEN }}'
         events: |
           - title: "Deploy catalog-service version ${{ env.CATALOG_VERSION }}"
             type: CUSTOM_INFO
@@ -145,8 +145,8 @@ jobs:
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v7
       with:
-        url: '${{ secrets.DT_URL }}'
-        token: '${{ secrets.DT_TOKEN }}'
+        url: '${{ secrets.DT_BASE_URL }}'
+        token: '${{ secrets.DT_API_TOKEN }}'
         events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
