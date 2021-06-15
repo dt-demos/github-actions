@@ -36,6 +36,7 @@ jobs:
         TIMEFRAME: ${{ env.TIMEFRAME }}
         DEBUG: ${{ env.DEBUG }}
     steps:
+      - uses: actions/checkout@v2
       - name: ls
         run: ls -l
       - name: pwd
