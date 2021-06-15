@@ -37,7 +37,6 @@ jobs:
                 repository-owner: ${{ github.repository_owner }}
                 repository: "https://github.com/${{ github.repository }}"
                 repository-branch: "${{ github.ref }}"
-
             - type: CUSTOM_DEPLOYMENT
               source: GitHub
               deploymentName: "CUSTOM_DEPLOYMENT deploymentName to PROCESS_GROUP_INSTANCE"
@@ -52,14 +51,12 @@ jobs:
                 repository-owner: ${{ github.repository_owner }}
                 repository: "https://github.com/${{ github.repository }}"
                 repository-branch: "${{ github.ref }}"
-
             - title: "CUSTOM_INFO title"
               type: CUSTOM_INFO
               description: "CUSTOM_INFO description"
               source: GitHub
               tags:
                 - SERVICE:service:order
-                
           metrics: |
             - metric: "github.metric1"
               value: "1.0"
@@ -68,7 +65,6 @@ jobs:
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
                 owner: "${{ github.repository_owner }}"
-
             - metric: "github.build.total"
               value: "1.0"
               dimensions:
@@ -76,7 +72,6 @@ jobs:
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
                 owner: "${{ github.repository_owner }}"
-
             - metric: "github.build.success"
               value: "1.0"
               dimensions:
