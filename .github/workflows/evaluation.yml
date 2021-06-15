@@ -38,8 +38,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: ls
-        run: ls -l
+        run: ls -l /
       - name: pwd
         run: pwd
       - name: SLO Evaluation
-        run: action.sh sloevaluation
+        run: /action.sh sloevaluation
