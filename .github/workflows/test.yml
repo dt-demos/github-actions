@@ -3,8 +3,6 @@
 # DT_TOKEN 
 
 name: Test Dynatrace OSS Action
-
-# Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   #push:
@@ -15,21 +13,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-        
       - name: Test CUSTOM_DEPLOYMENT
         uses: dynatrace-oss/dynatrace-github-action@v7
         with:
@@ -51,11 +38,6 @@ jobs:
                 repository: "https://github.com/${{ github.repository }}"
                 repository-branch: "${{ github.ref }}"
 
-      - name: Test CUSTOM_DEPLOYMENT
-        uses: dynatrace-oss/dynatrace-github-action@v7
-        with:
-          url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_TOKEN }}'
           events: |
             - type: CUSTOM_DEPLOYMENT
               source: GitHub
@@ -72,11 +54,6 @@ jobs:
                 repository: "https://github.com/${{ github.repository }}"
                 repository-branch: "${{ github.ref }}"
 
-      - name: Test CUSTOM_INFO
-        uses: dynatrace-oss/dynatrace-github-action@v7
-        with:
-          url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_TOKEN }}'
           events: |
             - title: "CUSTOM_INFO title"
               type: CUSTOM_INFO
@@ -85,11 +62,6 @@ jobs:
               tags:
                 - SERVICE:service:order
                 
-      - name: Build count
-        uses: dynatrace-oss/dynatrace-github-action@v7
-        with:
-          url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_TOKEN }}'
           metrics: |
             - metric: "github.metric1"
               value: "1.0"
@@ -99,12 +71,6 @@ jobs:
                 event: "${{ github.event_name }}"
                 owner: "${{ github.repository_owner }}"
 
-      # Call the Dynatrace git action
-      - name: Dynatrace Info Event
-        uses: dynatrace-oss/dynatrace-github-action@v7
-        with:
-          url: '${{ secrets.DT_URL }}'
-          token: '${{ secrets.DT_TOKEN }}'
           metrics: |
             - metric: "github.build.total"
               value: "1.0"
@@ -113,6 +79,7 @@ jobs:
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
                 owner: "${{ github.repository_owner }}"
+
             - metric: "github.build.success"
               value: "1.0"
               dimensions:
@@ -120,15 +87,3 @@ jobs:
                 branch: "${{ github.ref }}"
                 event: "${{ github.event_name }}"
                 owner: "${{ github.repository_owner }}"
-          events: |
-            - title: "GitHub Action Info Event"
-              type: CUSTOM_INFO
-              description: "Branch ${{ github.ref }} failed to build"
-              source: GitHub
-              tags:
-                - SERVICE:Test
-              dimensions:
-                project: "${{ github.repository }}"
-                branch: "${{ github.ref }}"
-                event: "${{ github.event_name }}"
-                owner: ${{ github.repository_owner }}
