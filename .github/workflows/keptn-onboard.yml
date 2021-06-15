@@ -11,8 +11,8 @@ env:
   KEPTN_STAGE: dev
   DEBUG: "true"
   CONFIGURE_DT_MONITORING: true
-  KEPTN_SHIPYARD_FILE: ./keptn/shipyard.yaml
-  DT_CONF_FILE: ./keptn/dynatrace.conf.yaml
+  KEPTN_SHIPYARD_FILE: keptn/shipyard.yaml
+  DT_CONF_FILE: keptn/dynatrace.conf.yaml
 
 jobs:
   build:
@@ -43,8 +43,8 @@ jobs:
       - name: ls
         run: ls -l
 
-      #- name: ls keptn
-      #  run: ls -l /mount/keptn
+      - name: cat KEPTN_SHIPYARD_FILE
+        run: cat $KEPTN_SHIPYARD_FILE
 
       - name: createdynatracesecret
         run: cd /keptn && ./action.sh createdynatracesecret
