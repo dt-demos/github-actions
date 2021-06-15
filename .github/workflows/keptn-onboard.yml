@@ -1,0 +1,41 @@
+# requires the following secrets:
+# KEPTN_API_TOKEN 
+
+name: SLO Evaluation
+on:
+  workflow_dispatch:
+
+env:
+  KEPTN_PROJECT: dt-orders
+  KEPTN_SERVICE: catalog
+  KEPTN_STAGE: dev
+  DEBUG: true
+  CONFIGURE_DT_MONITORING: true
+  KEPTN_SHIPYARD_FILE: /keptn/shipyard.yaml
+  DT_CONF_FILE: /keptn/dynatrace.conf.yaml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: dtdemos/keptn-automation:1
+      env:
+        KEPTN_BASE_URL: ${{ secrets.KEPTN_BASE_URL }}
+        KEPTN_API_TOKEN: ${{ secrets.KEPTN_API_TOKEN }}
+        KEPTN_PROJECT: ${{ env.KEPTN_PROJECT }}
+        KEPTN_SERVICE: ${{ env.KEPTN_SERVICE }}
+        KEPTN_STAGE: ${{ env.KEPTN_STAGE }}
+        CONFIGURE_DT_MONITORING: ${{ env.CONFIGURE_DT_MONITORING }}
+        DT_CONF_FILE: ${{ env.DT_CONF_FILE }}
+        KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
+        DEBUG: ${{ env.DEBUG }}
+    steps:
+      # github automatically creates a volume to the checked out code
+      # so we can reference them via ./foldername
+      - uses: actions/checkout@v2
+
+      - name: createdynatracesecret
+        run: cd /keptn && ./action.sh createdynatracesecret
+
+      - name: keptn onboardservice
+        run: cd /keptn && ./action.sh onboardservice
