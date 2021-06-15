@@ -42,4 +42,4 @@ jobs:
       - name: pwd
         run: pwd
       - name: SLO Evaluation
-        run: /action.sh sloevaluation
+        run: sloevaluation
