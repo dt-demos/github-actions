@@ -1,7 +1,7 @@
 # requires the following secrets:
 # KEPTN_API_TOKEN 
 
-name: SLO Evaluation
+name: Keptn Onboard Service
 on:
   workflow_dispatch:
 
