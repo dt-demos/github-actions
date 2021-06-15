@@ -36,6 +36,12 @@ jobs:
       # so we can reference them via ./foldername
       - uses: actions/checkout@v2
 
+      - name: ls
+        run: ls -l .
+
+      - name: ls keptn
+        run: ls -l ./keptn
+
       - name: createdynatracesecret
         run: cd /keptn && ./action.sh createdynatracesecret
 
