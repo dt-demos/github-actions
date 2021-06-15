@@ -31,16 +31,14 @@ jobs:
         DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
         KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
         DEBUG: ${{ env.DEBUG }}
-      volumes:
-        - /home/runner/work/_temp/_github_workflows:/mount
 
     steps:
       # github automatically creates a volume to the checked out code
       # so we can reference them via ./foldername
       - uses: actions/checkout@v2
 
-      - name: pwd
-        run: /__w/github-actions/github-actions
+      - name: ls
+        run: ls -l /__w/github-actions/github-actions
 
       - name: cat KEPTN_SHIPYARD_FILE
         run: cat $KEPTN_SHIPYARD_FILE
