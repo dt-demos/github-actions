@@ -27,8 +27,8 @@ jobs:
         KEPTN_STAGE: ${{ env.KEPTN_STAGE }}
         CONFIGURE_DT_MONITORING: ${{ env.CONFIGURE_DT_MONITORING }}
         DT_CONF_FILE: ${{ env.DT_CONF_FILE }}
-        DT_TENANT: ${{ secrets.$DT_TENANT }}
-        DT_API_TOKEN: ${{ secrets.$DT_API_TOKEN }}
+        DT_TENANT: ${{ secrets.DT_BASE_URL }}
+        DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
         KEPTN_SHIPYARD_FILE: ${{ env.KEPTN_SHIPYARD_FILE }}
         DEBUG: ${{ env.DEBUG }}
     steps:
