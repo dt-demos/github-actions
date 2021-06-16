@@ -16,6 +16,8 @@ env:
   #END: "2021-06-09T22:00:00"
   TIMEFRAME: 5m
   DEBUG: true
+  KEPTN_BASE_URL: https://rob00334.cloudautomation.live.dynatrace.com
+
 
 jobs:
   build:
@@ -24,7 +26,7 @@ jobs:
       image: dtdemos/keptn-automation:1
       env:
         EVALUATION_RULE: ${{ env.EVALUATION_RULE }}
-        KEPTN_BASE_URL: ${{ secrets.KEPTN_BASE_URL }}
+        KEPTN_BASE_URL: ${{ env.KEPTN_BASE_URL }}
         KEPTN_API_TOKEN: ${{ secrets.KEPTN_API_TOKEN }}
         KEPTN_PROJECT: ${{ env.KEPTN_PROJECT }}
         KEPTN_SERVICE: ${{ env.KEPTN_SERVICE }}
