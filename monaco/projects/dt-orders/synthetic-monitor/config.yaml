@@ -1,7 +1,19 @@
 config: 
-  - availability: "availabilty.json"
+  - site1: "site1.json"
+  - site2: "site2.json"
+  - site3: "site3.json"
 
-availability:
-  - name: "Test Availability"
+site1:
+  - name: "Demo Availability Site 1"
   - location: "GEOLOCATION-9999453BE4BDB3CD"
-  - host: "https://www.google.com"
+  - host: "https://www.azure.com"
+
+site2:
+  - name: "Demo Availability Site 2"
+  - location: "GEOLOCATION-9999453BE4BDB3CD"
+  - host: "https://www.dynatrace.com"
+
+site3:
+  - name: "Demo Availability Site 3"
+  - location: "GEOLOCATION-9999453BE4BDB3CD"
+  - host: "https://www.microsoft.com"
