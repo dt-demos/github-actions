@@ -39,6 +39,7 @@ jobs:
 
     - name: "Create k8 rolebinding for dt k8 dashboard"
       run: |
+        kubectl -n dev delete rolebinding default-view 
         kubectl -n dev create rolebinding default-view --clusterrole=view --serviceaccount=dev:default
 
     - name: "Deploy order-service"
