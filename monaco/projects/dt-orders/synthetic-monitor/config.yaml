@@ -1,0 +1,7 @@
+config: 
+  - availability: "availabilty.json"
+
+availability:
+  - name: "Test Availability"
+  - location: "GEOLOCATION-9999453BE4BDB3CD"
+  - host: "https://www.google.com"
