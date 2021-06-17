@@ -18,8 +18,8 @@ spec:
         app.kubernetes.io/managed-by: helm
         app.kubernetes.io/created-by: dynatrace-demos
       annotations:
-        annotation1: annotation1-value
-        annotation2: annotation2-value
+        owner: Team Frontend
+        chat-channel: dev-team-frontend 
     spec:
       containers:
       - name: frontend

@@ -18,8 +18,8 @@ spec:
         app.kubernetes.io/managed-by: helm
         app.kubernetes.io/created-by: dynatrace-demos
       annotations:
-        project: dt-orders
-        service: customer
+        owner: Team Services
+        chat-channel: dev-team-services
     spec:
       containers:
       - name: customer
