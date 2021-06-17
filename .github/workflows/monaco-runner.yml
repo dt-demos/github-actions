@@ -2,7 +2,7 @@
 # DT_BASE_URL
 # DT_API_TOKEN 
 
-name: Monaco Test
+name: Dynatrace Monitoring as Code
 on:
   workflow_dispatch:
 jobs:
