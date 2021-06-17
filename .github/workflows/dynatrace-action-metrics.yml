@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Force fail
-      if: ${{ github.event.inputs.fail-job == '0' }}
-      run: exit 1
+        if: ${{ github.event.inputs.fail-job == '0' }}
+        run: exit 1
       - name: Notify Dynatrace on Build
         uses: dynatrace-oss/dynatrace-github-action@v7
         with:
