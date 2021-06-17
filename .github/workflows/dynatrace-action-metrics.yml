@@ -22,7 +22,6 @@ jobs:
         with:
           url: '${{ secrets.DT_BASE_URL }}'
           token: '${{ secrets.DT_API_TOKEN }}'
-          - name: Notify Dynatrace on Build
           metrics: |
             - metric: "github.build.run"
               value: "1.0"
@@ -37,7 +36,6 @@ jobs:
         with:
           url: '${{ secrets.DT_BASE_URL }}'
           token: '${{ secrets.DT_API_TOKEN }}'
-          - name: Notify Dynatrace on Build Success
           metrics: |
             - metric: "github.build.success"
               value: "1.0"
@@ -52,7 +50,6 @@ jobs:
         with:
           url: '${{ secrets.DT_BASE_URL }}'
           token: '${{ secrets.DT_API_TOKEN }}'
-          - name: Notify Dynatrace on Build Failed
           metrics: |
             - metric: "github.build.fail"
               value: "1.0"
