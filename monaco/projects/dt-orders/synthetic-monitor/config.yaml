@@ -1,7 +1,7 @@
 config: 
-  - site1: "site1.json"
-  - site2: "site2.json"
-  - site3: "site3.json"
+  - site1: "availability.json"
+  - site2: "availability.json"
+  - site3: "availability.json"
 
 site1:
   - name: "Demo Availability Site 1"
