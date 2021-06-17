@@ -1,0 +1,63 @@
+# requires the following secrets:
+# DT_BASE_URL
+# DT_API_TOKEN 
+
+name: Dynatrace GitHub Action Metrics
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  #push:
+  #  branches: [ main ]
+  #pull_request:
+  #  branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Dynatrace on Build
+        uses: dynatrace-oss/dynatrace-github-action@v7
+        with:
+          url: '${{ secrets.DT_BASE_URL }}'
+          token: '${{ secrets.DT_API_TOKEN }}'
+          - name: Notify Dynatrace on Build
+          metrics: |
+            - metric: "github.build.run"
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: "${{ github.repository_owner }}"
+      - name: Notify Dynatrace on Build Success
+        if: ${{ success() }}
+        uses: dynatrace-oss/dynatrace-github-action@v7
+        with:
+          url: '${{ secrets.DT_BASE_URL }}'
+          token: '${{ secrets.DT_API_TOKEN }}'
+          - name: Notify Dynatrace on Build Success
+          metrics: |
+            - metric: "github.build.success"
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: "${{ github.repository_owner }}"
+      - name: Notify Dynatrace on Build Failed
+        if: ${{ failure() }}
+        uses: dynatrace-oss/dynatrace-github-action@v7
+        with:
+          url: '${{ secrets.DT_BASE_URL }}'
+          token: '${{ secrets.DT_API_TOKEN }}'
+          - name: Notify Dynatrace on Build Failed
+          metrics: |
+            - metric: "github.build.fail"
+              value: "1.0"
+              dimensions:
+                project: "${{ github.repository }}"
+                branch: "${{ github.ref }}"
+                event: "${{ github.event_name }}"
+                owner: "${{ github.repository_owner }}"
