@@ -3,7 +3,7 @@
 # DT_API_TOKEN 
 # AZURE_CREDENTIALS
 
-name: Deploy all
+name: Deploy All Services
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -51,12 +51,98 @@ jobs:
         images: |
           ${{ env.REGISTRY_NAME }}/dt-orders-frontend:${{ env.FRONTEND_VERSION }}
 
-    - name: "Dynatrace Deployment Event frontend"
+    - name: "Deploy customer-service"
+      uses: azure/k8s-deploy@v1.4
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        action: deploy
+        manifests: |
+          manifests/customer-service.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:${{ github.event.inputs.customer-version }}
+
+    - name: "Deploy catalog-service"
+      uses: azure/k8s-deploy@v1.4
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        action: deploy
+        manifests: |
+          manifests/catalog-service.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:${{ env.CATALOG_VERSION }}
+
+    - name: "Deploy order-service"
+      uses: azure/k8s-deploy@v1.4
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        action: deploy
+        manifests: |
+          manifests/order-service.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.order-version }}
+
+    - name: "Send Dynatrace Deployment Events"
       uses: dynatrace-oss/dynatrace-github-action@v7
       with:
         url: '${{ secrets.DT_BASE_URL }}'
         token: '${{ secrets.DT_API_TOKEN }}'
         events: |
+          - type: CUSTOM_DEPLOYMENT
+            source: GitHub
+            deploymentName: "Deploy customer version ${{ github.event.inputs.customer-version }}"
+            deploymentVersion: "${{ github.event.inputs.customer-version }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+            tags:
+              - PROCESS_GROUP_INSTANCE:service:customer
+            dimensions:
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
+          - type: CUSTOM_DEPLOYMENT
+            source: GitHub
+            deploymentName: "Deploy customer version ${{ github.event.inputs.customer-version  }}"
+            deploymentVersion: "${{ github.event.inputs.customer-version  }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+            tags:
+              - SERVICE:service:customer
+            dimensions:
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
+          - type: CUSTOM_DEPLOYMENT
+            source: GitHub
+            deploymentName: "Deploy order version ${{ github.event.inputs.order-version }}"
+            deploymentVersion: "${{ github.event.inputs.order-version }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+            tags:
+              - PROCESS_GROUP_INSTANCE:service:order
+            dimensions:
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
+          - type: CUSTOM_DEPLOYMENT
+            source: GitHub
+            deploymentName: "Deploy order version ${{ github.event.inputs.order-version  }}"
+            deploymentVersion: "${{ github.event.inputs.order-version  }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+            tags:
+              - SERVICE:service:order
+            dimensions:
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
             deploymentName: "Deploy frontend version ${{ env.FRONTEND_VERSION }}"
@@ -71,92 +157,43 @@ jobs:
               repository-owner: ${{ github.repository_owner }}
               repository: "https://github.com/${{ github.repository }}"
               repository-branch: "${{ github.ref }}"
-
-    - name: "Deploy customer-service"
-      uses: azure/k8s-deploy@v1.4
-      with:
-        namespace: ${{ env.NAMESPACE }}
-        action: deploy
-        manifests: |
-          manifests/customer-service.yml
-        images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-customer-service:${{ github.event.inputs.customer-version }}
-
-    - name: "Dynatrace Deployment Event Customer Service"
-      uses: dynatrace-oss/dynatrace-github-action@v7
-      with:
-        url: '${{ secrets.DT_BASE_URL }}'
-        token: '${{ secrets.DT_API_TOKEN }}'
-        events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
-            deploymentName: "Deploy frontend version ${{ github.event.inputs.customer-version }}"
-            deploymentVersion: "${{ github.event.inputs.customer-version }}"
+            deploymentName: "Deploy frontend version ${{ env.FRONTEND_VERSION  }}"
+            deploymentVersion: "${{ env.FRONTEND_VERSION  }}"
             deploymentProject: "${{ github.repository }}"
             remediationAction: "None"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - PROCESS_GROUP_INSTANCE:service:frontend
+              - SERVICE:service:frontend
             dimensions:
               project: "dt-orders"
               repository-owner: ${{ github.repository_owner }}
               repository: "https://github.com/${{ github.repository }}"
               repository-branch: "${{ github.ref }}"
-
-    - name: "Deploy catalog-service"
-      uses: azure/k8s-deploy@v1.4
-      with:
-        namespace: ${{ env.NAMESPACE }}
-        action: deploy
-        manifests: |
-          manifests/catalog-service.yml
-        images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-catalog-service:${{ env.CATALOG_VERSION }}
-
-    - name: "Dynatrace Deployment Event Catalog Service"
-      uses: dynatrace-oss/dynatrace-github-action@v7
-      with:
-        url: '${{ secrets.DT_BASE_URL }}'
-        token: '${{ secrets.DT_API_TOKEN }}'
-        events: |
-          - title: "Deploy catalog-service version ${{ env.CATALOG_VERSION }}"
-            type: CUSTOM_INFO
-            description: "Deploy catalog-service version ${{ env.CATALOG_VERSION }}"
-            source: GitHub
-            tags:
-              - SERVICE:service:catalog
-            dimensions:
-              project: "${{ github.repository }}"
-              branch: "${{ github.ref }}"
-              event: "${{ github.event_name }}"
-              owner: ${{ github.repository_owner }}
-              github-job: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
-
-    - name: "Deploy order-service"
-      uses: azure/k8s-deploy@v1.4
-      with:
-        namespace: ${{ env.NAMESPACE }}
-        action: deploy
-        manifests: |
-          manifests/order-service.yml
-        images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ github.event.inputs.order-version }}
-
-    - name: "Dynatrace Deployment Event Order Service"
-      uses: dynatrace-oss/dynatrace-github-action@v7
-      with:
-        url: '${{ secrets.DT_BASE_URL }}'
-        token: '${{ secrets.DT_API_TOKEN }}'
-        events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
-            deploymentName: "Deploy frontend version ${{ github.event.inputs.order-version }}"
-            deploymentVersion: "${{ github.event.inputs.order-version }}"
+            deploymentName: "Deploy catalog version ${{ env.CATALOG_VERSION }}"
+            deploymentVersion: "${{ env.CATALOG_VERSION }}"
             deploymentProject: "${{ github.repository }}"
             remediationAction: "None"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - PROCESS_GROUP_INSTANCE:service:frontend
+              - PROCESS_GROUP_INSTANCE:service:catalog
+            dimensions:
+              project: "dt-orders"
+              repository-owner: ${{ github.repository_owner }}
+              repository: "https://github.com/${{ github.repository }}"
+              repository-branch: "${{ github.ref }}"
+          - type: CUSTOM_DEPLOYMENT
+            source: GitHub
+            deploymentName: "Deploy catalog version ${{ env.CATALOG_VERSION }}"
+            deploymentVersion: "${{ env.CATALOG_VERSION }}"
+            deploymentProject: "${{ github.repository }}"
+            remediationAction: "None"
+            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
+            tags:
+              - SERVICE:service:catalog
             dimensions:
               project: "dt-orders"
               repository-owner: ${{ github.repository_owner }}
