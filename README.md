@@ -26,7 +26,7 @@ The set workflows are designed to show one step or the entire set of steps withi
 
 1. [Dynatrace tenant](https://www.dynatrace.com/trial)
 1. [Keptn](https://www.keptn.sh) installed with Dynatrace monitoring service
-1. AKS Cluster installed with [Dynatrace Operator](https://www.dynatrace.com/support/help/technology-support/cloud-platforms/kubernetes/migrate-to-dynatrace-operator-k8/).  For my cluster I ran:
+1. AKS Cluster installed with [Dynatrace Operator](https://www.dynatrace.com/support/help/technology-support/cloud-platforms/kubernetes/).  For my cluster I ran:
     ```
     az aks create --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP \
     --node-count 2 --enable-addons monitoring --generate-ssh-keys
