@@ -1,12 +1,12 @@
 # Overview 
 
-The folder contains demo [github actions](https://github.com/features/actions) workflows that showcase how to integrate Dynatrace into software delivery workflows.
+The folder contains a set of [github actions](https://github.com/features/actions) workflows that showcase how to integrate Dynatrace into software delivery workflows.
 
-Here is a YouTube video demo:
+This was demonstrated in [this](https://www.youtube.com/watch?v=nBs2P7Idtz0) Monitor and modernize Azure operations with Dynatrace webinar starting at minute 25. 
 
-[![YouTube Video](https://img.youtube.com/vi/sr_bKKfEKFA/0.jpg)](https://www.youtube.com/watch?v=sr_bKKfEKFA)
+[![Monitor and modernize Azure operations with Dynatrace webinar](https://img.youtube.com/vi/nBs2P7Idtz0/0.jpg)](https://www.youtube.com/watch?v=nBs2P7Idtz0)
 
-# Workflows
+# Demo Workflows
 
 The set workflows are designed to show one step or the entire set of steps within this this representative pipeline diagram.
 
@@ -20,3 +20,20 @@ The set workflows are designed to show one step or the entire set of steps withi
 | F | Dynatrace GitHub Action | Demos this [GitHub Action](https://github.com/marketplace/actions/dynatraceaction) lets you send events [Dynatrace Custom metrics](https://www.dynatrace.com/news/blog/simplify-observability-for-all-your-custom-metrics-part-2-oneagent-metric-api/) about the GitHub workflow executions | 
 | A,D | Deploy All | Demos the the deployment of the [Dynatrace Orders Demo Application](https://github.com/dt-orders/overview) to an Azure Kubernetes cluster.  Also calls the Dynatrace GitHub Action to send deployment events to Dynatrace. All supporting files are in the `manifests` subfolder. |
 | A,D | Deploy Order | Same as "Deploy All" workflow, but just deploys the "order" service. |
+
+
+# Demo Setup
+
+1. [Dynatrace tenant](https://www.dynatrace.com/trial)
+1. [Keptn](https://www.keptn.sh) installed with Dynatrace monitoring service
+1. AKS Cluster installed with [Dynatrace Operator](https://www.dynatrace.com/support/help/technology-support/cloud-platforms/kubernetes/migrate-to-dynatrace-operator-k8/).  For my cluster I ran:
+    ```
+    az aks create --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP \
+    --node-count 2 --enable-addons monitoring --generate-ssh-keys
+    ```
+1. github secrets were setup that are referenced in the workflows
+    * `AZURE_CREDENTIALS - JSON output from `az ad sp create-for-rbac` command
+    * `DT_API_TOKEN`     - API token with permission required by the Dynatrace action and Keptn onboard project container
+    * `DT_BASE_URL - Dynatrace URL such as `https://abc.live.dynatrace.com`
+    * `KEPTN_API_TOKEN` - Keptn API Token
+    * `KEPTN_BASE_URL` -  Keptn URL used by Keptn Bridge and API calls
