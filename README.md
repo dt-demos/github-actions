@@ -32,8 +32,8 @@ The set workflows are designed to show one step or the entire set of steps withi
     --node-count 2 --enable-addons monitoring --generate-ssh-keys
     ```
 1. github secrets were setup that are referenced in the workflows
-    * `AZURE_CREDENTIALS - JSON output from `az ad sp create-for-rbac` command
-    * `DT_API_TOKEN`     - API token with permission required by the Dynatrace action and Keptn onboard project container
-    * `DT_BASE_URL - Dynatrace URL such as `https://abc.live.dynatrace.com`
+    * `AZURE_CREDENTIALS` - JSON output from `az ad sp create-for-rbac` command
+    * `DT_API_TOKEN` - API token with permission required by the Dynatrace action and Keptn onboard project container
+    * `DT_BASE_URL` - Dynatrace URL such as `https://abc.live.dynatrace.com`
     * `KEPTN_API_TOKEN` - Keptn API Token
     * `KEPTN_BASE_URL` -  Keptn URL used by Keptn Bridge and API calls
