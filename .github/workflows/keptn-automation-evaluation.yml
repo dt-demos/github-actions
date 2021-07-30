@@ -8,22 +8,22 @@ on:
 
 env:
   EVALUATION_RULE: pass_on_warning
-  KEPTN_PROJECT: dt-orders
+  KEPTN_PROJECT: dynatrace
   KEPTN_SERVICE: catalog
-  KEPTN_STAGE: dev
+  KEPTN_STAGE: quality-gate
   LABELS: "runId=${{ github.run_id }},executedBy=GitHub,Job=https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"            
   #START: "2021-06-09T21:00:00"
   #END: "2021-06-09T22:00:00"
   TIMEFRAME: 5m
   DEBUG: true
-  KEPTN_BASE_URL: https://rob00334.cloudautomation.live.dynatrace.com
+  KEPTN_BASE_URL: https://fqq58422.cloudautomation.live.dynatrace.com
 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: dtdemos/keptn-automation:1
+      image: dtdemos/keptn-automation:1.0.0
       env:
         EVALUATION_RULE: ${{ env.EVALUATION_RULE }}
         KEPTN_BASE_URL: ${{ env.KEPTN_BASE_URL }}
