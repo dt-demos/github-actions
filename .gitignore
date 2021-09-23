@@ -3,6 +3,7 @@
 .logs
 todo.txt
 notused/
+install.sh
 
 # downloaded files
 monaco/.logs

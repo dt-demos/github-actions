@@ -8,16 +8,14 @@ on:
 
 env:
   EVALUATION_RULE: pass_on_warning
-  KEPTN_PROJECT: dynatrace
-  KEPTN_SERVICE: catalog
-  KEPTN_STAGE: quality-gate
+  KEPTN_PROJECT: dt-orders
+  KEPTN_SERVICE: frontend
+  KEPTN_STAGE: staging
   LABELS: "runId=${{ github.run_id }},executedBy=GitHub,Job=https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"            
   #START: "2021-06-09T21:00:00"
   #END: "2021-06-09T22:00:00"
   TIMEFRAME: 5m
   DEBUG: true
-  KEPTN_BASE_URL: https://fqq58422.cloudautomation.live.dynatrace.com
-
 
 jobs:
   build:
@@ -41,5 +39,6 @@ jobs:
     steps:
       - name: keptn get project
         run: keptn.sh get project
+      
       - name: SLO Evaluation
         run: slo-evaluation.sh

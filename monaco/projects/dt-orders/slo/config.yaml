@@ -1,6 +1,6 @@
 config:
-  - dev-slo: "dev-slo.json"
+  - staging-slo: "staging-slo.json"
 
-dev-slo:
-  - name: "DT-Orders Dev Error Rate"
-  - mzname: "dt-orders/management-zone/dt-orders-dev.name"
+staging-slo:
+  - name: "DT-Orders staging Error Rate"
+  - mzname: "dt-orders/management-zone/dt-orders-staging.name"

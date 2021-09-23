@@ -1,5 +1,5 @@
 config:
-  - dt-orders-dev: "dt-orders-dev.json"
+  - dt-orders-staging: "dt-orders-staging.json"
 
-dt-orders-dev:
-  - name: "dt-orders-dev"
+dt-orders-staging:
+  - name: "dt-orders-staging"
