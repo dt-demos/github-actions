@@ -1,14 +1,6 @@
 # Overview 
 
-The folder contains a set of [github actions](https://github.com/features/actions) workflows that showcase how to integrate Dynatrace into software delivery workflows.
-
-This was demonstrated in [this](https://www.youtube.com/watch?v=nBs2P7Idtz0) Monitor and modernize Azure operations with Dynatrace webinar starting at minute 25. 
-
-[![Monitor and modernize Azure operations with Dynatrace webinar](https://img.youtube.com/vi/nBs2P7Idtz0/0.jpg)](https://www.youtube.com/watch?v=nBs2P7Idtz0)
-
-# Demo Workflows
-
-The set workflows are designed to show one step or the entire set of steps within this this representative pipeline diagram.
+The folder contains a set of [GitHub actions](https://github.com/features/actions) workflows that showcase how to integrate Dynatrace into software delivery workflows within this representative pipeline.
 
 ![app](./images/workflow.png)
 
@@ -21,6 +13,11 @@ The set workflows are designed to show one step or the entire set of steps withi
 | A,D | Deploy All | Demos the the deployment of the [Dynatrace Orders Demo Application](https://github.com/dt-orders/overview) to an Azure Kubernetes cluster.  Also calls the Dynatrace GitHub Action to send deployment events to Dynatrace. All supporting files are in the `manifests` subfolder. |
 | A,D | Deploy Order | Same as "Deploy All" workflow, but just deploys the "order" service. |
 
+# Watch and learn more 
+
+* Read more about this on this [Dynatrace 2 part Blog series](https://www.dynatrace.com/news/blog/how-dynatrace-and-github-help-you-deliver-better-software-faster/)
+
+* This was demonstrated in this `Monitor and modernize Azure operations with Dynatrace webinar` you can watch on [YouTube](https://www.youtube.com/watch?v=nBs2P7Idtz0) starting at minute 25. 
 
 # Demo Setup
 
