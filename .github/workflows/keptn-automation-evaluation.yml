@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  EVALUATION_RULE: pass_on_warning
+  EVALUATION_RULE: ignore #ignore, pass_on_warning, fail_on_warning
   KEPTN_PROJECT: dt-orders
   KEPTN_SERVICE: frontend
   KEPTN_STAGE: staging
