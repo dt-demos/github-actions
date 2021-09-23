@@ -46,3 +46,12 @@ jobs:
 
       - name: keptn onboardservice
         run: keptn.sh create project $KEPTN_PROJECT --shipyard=$KEPTN_SHIPYARD_FILE
+
+      - name: configure_dynatrace_monitoring_for_project
+        run: keptn.sh configure monitoring dynatrace --project=$KEPTN_PROJECT
+
+      - name: create_service
+        run: keptn.sh create service $KEPTN_SERVICE --project=$KEPTN_PROJECT
+
+      - name: configure_service_with_dynatrace_query
+        run: keptn.sh add-resource --project=$KEPTN_PROJECT --stage=$KEPTN_STAGE --service=$KEPTN_SERVICE --resource=$DT_CONF_FILE --resourceUri=dynatrace/dynatrace.conf.yaml
