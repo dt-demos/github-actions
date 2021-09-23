@@ -49,6 +49,13 @@ Demo uses an Azure AKS cluster with Dynatrace SaaS tenant
     --scopes /subscriptions/$AZ_SUBSCRIPTION/resourceGroups/$RESOURCE_GROUP --sdk-auth
     ```
 
+1. Once cluster is made, run the following commands
+    ```
+    kubectl create ns staging
+    kubectl -n staging delete rolebinding default-view 
+    kubectl -n staging create rolebinding default-view --clusterrole=view --serviceaccount=staging:default
+    ```
+
 1. For the local kubectl config, run this command to set credentials
     ```
     az aks get-credentials --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP
