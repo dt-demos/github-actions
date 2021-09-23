@@ -4,4 +4,4 @@ metadata:
   name: "shipyard-dt-orders"
 spec:
   stages:
-    - name: "dev"
+    - name: "staging"

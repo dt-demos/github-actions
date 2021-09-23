@@ -1,0 +1,6 @@
+delete:
+  - "auto-tag/auto-tag-project"
+  - "auto-tag/auto-tag-service"
+  - "auto-tag/auto-tag-stage"
+  - "management-zone/dt-orders-staging"
+  - "slo/DT-Orders staging Error Rate"

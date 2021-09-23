@@ -1,4 +1,4 @@
 workshop:
     - name: "dt-orders"
-    - env-url: "{{ .Env.DT_BASEURL }}"
+    - env-url: "{{ .Env.DT_BASE_URL }}"
     - env-token-name: "DT_API_TOKEN"

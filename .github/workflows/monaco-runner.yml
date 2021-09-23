@@ -9,9 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: dynatraceace/monaco-runner:release-v1.5.3
+      image: dynatraceace/monaco-runner:release-v1.6.0
       env:
-        DT_BASEURL: ${{ secrets.DT_BASE_URL }}
+        DT_BASE_URL: ${{ secrets.DT_BASE_URL }}
         DT_API_TOKEN: ${{ secrets.DT_API_TOKEN }}
         NEW_CLI: "1"
     steps:

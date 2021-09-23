@@ -20,7 +20,7 @@ env:
   REGISTRY_NAME: dtdemos
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
-  NAMESPACE: dev
+  NAMESPACE: staging
   FRONTEND_VERSION: 1
   CATALOG_VERSION: 1
 
@@ -41,11 +41,6 @@ jobs:
     - name: "Create namespace if doesn't exist"
       run: |
         kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -
-
-    - name: "Create k8 rolebinding for dt k8 dashboard"
-      run: |
-        kubectl -n dev delete rolebinding default-view 
-        kubectl -n dev create rolebinding default-view --clusterrole=view --serviceaccount=dev:default
 
     - name: "Deploy frontend"
       uses: azure/k8s-deploy@v1.4

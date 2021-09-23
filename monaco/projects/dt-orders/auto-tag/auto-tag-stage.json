@@ -32,7 +32,7 @@
     {
       "type": "SERVICE",
       "enabled": true,
-      "valueFormat": "dev",
+      "valueFormat": "staging",
       "propagationTypes": [
         "SERVICE_TO_PROCESS_GROUP_LIKE"
       ],
@@ -46,7 +46,7 @@
           "comparisonInfo": {
             "type": "STRING",
             "operator": "EQUALS",
-            "value": "dev",
+            "value": "staging",
             "negate": false,
             "caseSensitive": true
           }

@@ -13,7 +13,7 @@
       "comparisonInfo": {
         "type": "STRING",
         "operator": "EQUALS",
-        "value": "dev",
+        "value": "staging",
         "negate": false,
         "caseSensitive": true
       }
