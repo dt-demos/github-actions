@@ -37,5 +37,11 @@ jobs:
         DEBUG: ${{ env.DEBUG }}
 
     steps:
+      - name: Build
+        run: echo "Do your build here"
+      - name: Deployment
+        run: echo "Do your deployment here"
+      - name: Test
+        run: echo "Do your test run here"
       - name: SLO Evaluation
         run: slo-evaluation.sh
