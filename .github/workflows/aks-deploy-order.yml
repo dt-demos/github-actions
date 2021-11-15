@@ -12,6 +12,9 @@ on:
         description: 'Order Service Version'     
         required: true
         default: '1'
+  repository_dispatch:
+    types: 
+      - deploy
 env:
   REGISTRY_NAME: dtdemos
   CLUSTER_NAME: jahn-aks-demo
