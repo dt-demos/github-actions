@@ -33,17 +33,18 @@ jobs:
     - name: "Set new feature number"
       run: |
         if [ "${{ github.event.action == 'deploy1' }} ];then
-          VERSION_NUMBER='1'
+          export VERSION_NUMBER='1'
         elif [ "${{ github.event.action == 'deploy2' }} ];then
-          VERSION_NUMBER='2'
+          export VERSION_NUMBER='2'
         elif [ ! -z ${{ github.event.inputs.order-version }} ];then
-          VERSION_NUMBER=${{ github.event.inputs.order-version }}
+          export VERSION_NUMBER=${{ github.event.inputs.order-version }}
         else
           echo "Missing VERSION_NUMBER argument"
           exit 1
         fi
+        echo "Set VERSION_NUMBER to $VERSION_NUMBER"
         echo "Set VERSION_NUMBER to ${{ env.VERSION_NUMBER }}"
-      
+
     - name: Update order-service.yml
       run: |
         echo "Setting manifest version to ${{ env.VERSION_NUMBER }}"
