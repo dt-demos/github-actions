@@ -37,20 +37,20 @@ jobs:
           VERSION_NUMBER='1'
         elif [ "${{ github.event.action == 'deploy2' }} ];then
           VERSION_NUMBER='2'
-        elif [ -z ${{ github.event.inputs.order-version }} ];then
+        elif [ ! -z ${{ github.event.inputs.order-version }} ];then
           VERSION_NUMBER=${{ github.event.inputs.order-version }}
         else
           echo "Missing VERSION_NUMBER argument"
           exit 1
         fi
-        echo "Set VERSION_NUMBER to $VERSION_NUMBER"
+        echo "Set VERSION_NUMBER to {{ env.VERSION_NUMBER }}"
       
     - name: Update order-service.yml
       run: |
-        echo "Setting manifest version to $VERSION_NUMBER"
+        echo "Setting manifest version to {{ env.VERSION_NUMBER }}"
         MANIFEST_FILE=manifests/order-service.yml
-        sed -ie "s|version: .*$|version: \"$VERSION_NUMBER\"|" $MANIFEST_FILE
-        sed -ie "s|image: dtdemos/dt-orders-order-service:.*$|image: dtdemos/dt-orders-order-service:$VERSION_NUMBER|" $MANIFEST_FILE
+        sed -ie "s|version: .*$|version: \"{{ env.VERSION_NUMBER }}R\"|" $MANIFEST_FILE
+        sed -ie "s|image: dtdemos/dt-orders-order-service:.*$|image: dtdemos/dt-orders-order-service:{{ env.VERSION_NUMBER }}|" $MANIFEST_FILE
         cat $MANIFEST_FILE
 
     - name: "Set the target AKS cluster"
@@ -68,7 +68,7 @@ jobs:
         manifests: |
           manifests/order-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:$VERSION_NUMBER
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:{{ env.VERSION_NUMBER }}
 
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v7
@@ -78,8 +78,8 @@ jobs:
         events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
-            deploymentName: "Deploy order version $VERSION_NUMBER"
-            deploymentVersion: "$VERSION_NUMBER"
+            deploymentName: "Deploy order version {{ env.VERSION_NUMBER }}"
+            deploymentVersion: "{{ env.VERSION_NUMBER }}"
             deploymentProject: "dt-orders"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
