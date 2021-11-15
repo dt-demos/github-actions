@@ -36,18 +36,18 @@ jobs:
     - name: "Set new feature number"
       run: |
         if [ ${{ github.event.action == 'deploy1' }} ];then
-          #VERSION_NUM='1'
-          echo "version_num='1'" >> $GITHUB_ENV
+          VERSION_NUM='1'
+          #echo "version_num='1'" >> $GITHUB_ENV
         elif [ ${{ github.event.action == 'deploy2' }} ];then
-          #VERSION_NUM='2'
-          echo "version_num='2'" >> $GITHUB_ENV
+          VERSION_NUM='2'
+          #echo "version_num='2'" >> $GITHUB_ENV
         elif [ ${{ github.event.action == 'deploy3' }} ];then
-          #VERSION_NUM='3'
-          echo "version_num='3'" >> $GITHUB_ENV
+          VERSION_NUM='3'
+          #echo "version_num='3'" >> $GITHUB_ENV
         elif [ ${{ github.event.action == 'deploy4' }} ];then
-          #VERSION_NUM='4'
-          echo "version_num='4'" >> $GITHUB_ENV
-        elif [ ! -z ${{ github.event.inputs.order-version }} ];then
+          VERSION_NUM='4'
+          #echo "version_num='4'" >> $GITHUB_ENV
+        elif [ ! -z "${{ github.event.inputs.order-version" }} ];then
           echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
           #VERSION_NUM=
           echo "version_num='${{ github.event.inputs.order-version }}'" >> $GITHUB_ENV
@@ -58,10 +58,15 @@ jobs:
         
         echo "version_num = $version_num"
         echo "Set version_num to ${{ env.version_num }}"
+        echo "version_num='$version_num'"
+        echo "version_num='$version_num'" >> $GITHUB_ENV
+        echo "Set version_num to ${{ env.version_num }}"
 
     - name: Update order-service.yml
       run: |
-        echo "Setting manifest version to ${{ env.VERSION_NUMBER }}"
+        echo "Setting manifest version to ${{ env.version_num }}"
+        echo "Setting manifest version to $version_num"
+
         MANIFEST_FILE=manifests/order-service.yml
         sed -ie "s|version: .*$|version: \"${{ env.VERSION_NUMBER }}\"|" $MANIFEST_FILE
         sed -ie "s|image: dtdemos/dt-orders-order-service:.*$|image: dtdemos/dt-orders-order-service:${{ env.VERSION_NUMBER }}|" $MANIFEST_FILE
