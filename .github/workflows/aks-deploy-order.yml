@@ -47,15 +47,16 @@ jobs:
         elif [ ${{ github.event.action == 'deploy4' }} ];then
           VERSION_NUM='4'
           #echo "version_num='4'" >> $GITHUB_ENV
-        elif [ ! -z "${{ github.event.inputs.order-version" }} ];then
+        elif [ ! -z ${{ github.event.inputs.order-version }} ];then
           echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
           #VERSION_NUM=
-          echo "version_num='${{ github.event.inputs.order-version }}'" >> $GITHUB_ENV
+          #echo "version_num='${{ github.event.inputs.order-version }}'" >> $GITHUB_ENV
         else
           echo "Missing version number argument"
           exit 1
         fi
         
+        echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
         echo "version_num = $version_num"
         echo "Set version_num to ${{ env.version_num }}"
         echo "version_num='$version_num'"
