@@ -63,23 +63,11 @@ jobs:
             deploymentVersion: "${{ github.event.inputs.order-version }}"
             deploymentProject: "dt-orders"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
-            entities:
-              - PROCESS_GROUP_INSTANCE-FE7E4343A99AF7A8
-            dimensions:
-              project: "${{ github.repository }}"
-              repository-owner: ${{ github.repository_owner }}
-              repository: "https://github.com/${{ github.repository }}"
-              repository-branch: "${{ github.ref }}"
-          - type: CUSTOM_DEPLOYMENT
-            source: GitHub
-            deploymentName: "Deploy order version ${{ github.event.inputs.order-version }}"
-            deploymentVersion: "${{ github.event.inputs.order-version }}"
-            deploymentProject: "dt-orders"
-            ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
-              - SERVICE:service:order
+              - PROCESS_GROUP_INSTANCE:service:order
             dimensions:
               project: "${{ github.repository }}"
               repository-owner: ${{ github.repository_owner }}
               repository: "https://github.com/${{ github.repository }}"
               repository-branch: "${{ github.ref }}"
+          
