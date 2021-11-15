@@ -47,6 +47,7 @@ jobs:
 
     - name: Update order-service.yml
       run: |
+        echo "Setting manifest version to $VERSION_NUMBER"
         echo "Setting manifest version to ${{ env.VERSION_NUMBER }}"
         MANIFEST_FILE=manifests/order-service.yml
         sed -ie "s|version: .*$|version: \"${{ env.VERSION_NUMBER }}R\"|" $MANIFEST_FILE
