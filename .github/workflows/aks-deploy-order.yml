@@ -35,33 +35,17 @@ jobs:
       
     - name: "Set new feature number"
       run: |
-        if [ ${{ github.event.action == 'deploy1' }} ];then
-          version_num=1
-          #echo "version_num='1'" >> $GITHUB_ENV
-        elif [ ${{ github.event.action == 'deploy2' }} ];then
-          version_num=2
-          #echo "version_num='2'" >> $GITHUB_ENV
-        elif [ ${{ github.event.action == 'deploy3' }} ];then
-          version_num=3
-          #echo "version_num='3'" >> $GITHUB_ENV
-        elif [ ${{ github.event.action == 'deploy4' }} ];then
-          version_num=4
-          #echo "version_num='4'" >> $GITHUB_ENV
-        elif [ ! -z ${{ github.event.inputs.order-version }} ];then
+        if [ ! -z ${{ github.event.inputs.order-version }} ];then
           echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
-          version_num=${{ github.event.inputs.order-version }}
-          #echo "version_num='${{ github.event.inputs.order-version }}'" >> $GITHUB_ENV
+          version_num="${{ github.event.inputs.order-version }}"
+          echo "version_num=$version_num
         else
           echo "Missing version number argument"
           exit 1
         fi
         
         echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
-        echo "version_num = $version_num"
-        echo "Set version_num to ${{ env.version_num }}"
         echo "version_num=$version_num"
-        echo "version_num=$version_num" >> $GITHUB_ENV
-        echo "Set version_num to ${{ env.version_num }}"
 
     - name: Update order-service.yml
       run: |
