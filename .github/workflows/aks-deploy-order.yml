@@ -25,6 +25,15 @@ jobs:
     steps:
     - name: "Get code from github repo"
       uses: actions/checkout@master
+      
+    - name: Update order-service.yml
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'manifests/order-service.yml'
+          propertyPath: 'spec.template.metadata.labels."app.kubernetes.io/version"'
+          value: "${{ github.event.inputs.order-version }}"
+          commitChange: true
+          updateFile: true
 
     - name: "Set the target AKS cluster"
       uses: azure/aks-set-context@v1
