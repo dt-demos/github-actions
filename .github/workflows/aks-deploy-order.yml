@@ -38,17 +38,17 @@ jobs:
         if [ ! -z ${{ github.event.inputs.order-version }} ];then
           echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
           version_num="${{ github.event.inputs.order-version }}"
-        elif [ ${{ github.event.action == 'deploy1' }} ];then
-          version_num="1"
+        elif [ ${{ github.event.action }} = "deploy1" }} ];then
+          version_num=1
           echo "webhook triggered version $version_num"
-        elif [ ${{ github.event.action == 'deploy2' }} ];then
-          version_num="2"
+        elif [ ${{ github.event.action }} = "deploy2" }} ];then
+          version_num=2"
           echo "webhook triggered version $version_num"
-        elif [ ${{ github.event.action == 'deploy3' }} ];then
-          version_num="3"
+        elif [ ${{ github.event.action }} = "deploy3" }} ];then
+          version_num=3
           echo "webhook triggered version $version_num"
-        elif [ ${{ github.event.action == 'deploy4' }} ];then
-          version_num="4"
+        elif [ ${{ github.event.action }} = "deploy4" }} ];then
+          version_num=4
           echo "webhook triggered version $version_num"
         else
           echo "Missing version number argument"
