@@ -21,7 +21,6 @@ env:
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
   NAMESPACE: staging
-  VERSION_NUMBER: '1'
 
 jobs:
   deploy:
@@ -43,14 +42,14 @@ jobs:
           echo "Missing VERSION_NUMBER argument"
           exit 1
         fi
-        echo "Set VERSION_NUMBER to {{ env.VERSION_NUMBER }}"
+        echo "Set VERSION_NUMBER to ${{ env.VERSION_NUMBER }}"
       
     - name: Update order-service.yml
       run: |
-        echo "Setting manifest version to {{ env.VERSION_NUMBER }}"
+        echo "Setting manifest version to ${{ env.VERSION_NUMBER }}"
         MANIFEST_FILE=manifests/order-service.yml
-        sed -ie "s|version: .*$|version: \"{{ env.VERSION_NUMBER }}R\"|" $MANIFEST_FILE
-        sed -ie "s|image: dtdemos/dt-orders-order-service:.*$|image: dtdemos/dt-orders-order-service:{{ env.VERSION_NUMBER }}|" $MANIFEST_FILE
+        sed -ie "s|version: .*$|version: \"${{ env.VERSION_NUMBER }}R\"|" $MANIFEST_FILE
+        sed -ie "s|image: dtdemos/dt-orders-order-service:.*$|image: dtdemos/dt-orders-order-service:${{ env.VERSION_NUMBER }}|" $MANIFEST_FILE
         cat $MANIFEST_FILE
 
     - name: "Set the target AKS cluster"
@@ -68,7 +67,7 @@ jobs:
         manifests: |
           manifests/order-service.yml
         images: |
-          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:{{ env.VERSION_NUMBER }}
+          ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ env.VERSION_NUMBER }}
 
     - name: "Dynatrace Deployment Event Order Service"
       uses: dynatrace-oss/dynatrace-github-action@v7
@@ -78,8 +77,8 @@ jobs:
         events: |
           - type: CUSTOM_DEPLOYMENT
             source: GitHub
-            deploymentName: "Deploy order version {{ env.VERSION_NUMBER }}"
-            deploymentVersion: "{{ env.VERSION_NUMBER }}"
+            deploymentName: "Deploy order version ${{ env.VERSION_NUMBER }}"
+            deploymentVersion: "${{ env.VERSION_NUMBER }}"
             deploymentProject: "dt-orders"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
