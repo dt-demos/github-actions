@@ -55,8 +55,8 @@ jobs:
             deploymentVersion: "${{ github.event.inputs.order-version }}"
             deploymentProject: "dt-orders"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
-            tags:
-              - PROCESS_GROUP_INSTANCE:service:order
+            entities:
+              - PROCESS_GROUP_INSTANCE-FE7E4343A99AF7A8
             dimensions:
               project: "${{ github.repository }}"
               repository-owner: ${{ github.repository_owner }}
