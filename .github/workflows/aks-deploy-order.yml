@@ -24,7 +24,6 @@ env:
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
   NAMESPACE: staging
-  VERSION_NUMBER: '1'
 
 jobs:
   deploy:
