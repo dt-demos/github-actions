@@ -14,10 +14,7 @@ on:
         default: '1'
   repository_dispatch:
     types: 
-      - deploy1
-      - deploy2
-      - deploy3
-      - deploy4
+      - deploy
 
 env:
   REGISTRY_NAME: dtdemos
@@ -38,17 +35,8 @@ jobs:
         if [ ! -z ${{ github.event.inputs.order-version }} ];then
           echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
           version_num="${{ github.event.inputs.order-version }}"
-        elif [ "${{ github.event.action }}" = "deploy1" ];then
-          version_num=1
-          echo "webhook triggered version $version_num"
-        elif [ "${{ github.event.action }}" = "deploy2" ];then
-          version_num=2
-          echo "webhook triggered version $version_num"
-        elif [ "${{ github.event.action }}" = "deploy3" ];then
-          version_num=3
-          echo "webhook triggered version $version_num"
-        elif [ "${{ github.event.action }}" = "deploy4" ];then
-          version_num=4
+        elif [ "${{ github.event.action }}" = "deploy" ];then
+          version_num="${{ github.event.client_payload.version }}"
           echo "webhook triggered version $version_num"
         else
           echo "Missing version number argument"
