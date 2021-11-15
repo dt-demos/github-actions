@@ -31,6 +31,8 @@ spec:
         env:
         - name: DT_CUSTOM_PROP
           value: "project=dt-orders service=order"
+        - name: DT_RELEASE_BUILD_VERSION
+          value: "20210924.1601"
 ---
 apiVersion: v1
 kind: Service
