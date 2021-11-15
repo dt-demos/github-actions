@@ -42,7 +42,7 @@ jobs:
           version_num=1
           echo "webhook triggered version $version_num"
         elif [ "${{ github.event.action }}" = "deploy2" ];then
-          version_num=2"
+          version_num=2
           echo "webhook triggered version $version_num"
         elif [ "${{ github.event.action }}" = "deploy3" ];then
           version_num=3
