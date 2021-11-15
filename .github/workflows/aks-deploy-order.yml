@@ -50,7 +50,7 @@ jobs:
           echo "Missing VERSION_NUMBER argument"
           exit 1
         fi
-        echo "VERSION_NUMBER=$VERSION_NUMBER" >> $GITHUB_ENV
+        export VERSION_NUMBER=$VERSION_NUMBER
         echo "Set VERSION_NUMBER to ${{ env.VERSION_NUMBER }}"
 
     - name: Update order-service.yml
