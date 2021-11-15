@@ -45,7 +45,7 @@ jobs:
         fi
         
         echo "inputs.order-version = ${{ github.event.inputs.order-version }}"
-        echo "version_num=$version_num"
+        echo "version_num=$version_num" >> $GITHUB_ENV
 
     - name: Update order-service.yml
       run: |
