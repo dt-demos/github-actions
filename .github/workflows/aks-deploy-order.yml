@@ -12,6 +12,8 @@ on:
         description: 'Order Service Version'     
         required: true
         default: '1'
+  # Allows you to run this workflow from a POST request dispatch
+  # https://pakstech.com/blog/github-actions-repository-dispatch/
   repository_dispatch:
     types: 
       - deploy
@@ -21,6 +23,7 @@ env:
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
   NAMESPACE: staging
+  PROJECT: dt-orders
 
 jobs:
   deploy:
@@ -82,7 +85,7 @@ jobs:
             source: GitHub
             deploymentName: "Deploy order version ${{ env.version_num }}"
             deploymentVersion: "${{ env.version_num }}"
-            deploymentProject: "dt-orders"
+            deploymentProject: "${{ env.project }}"
             ciBackLink: "https://github.com/dt-demos/github-actions/actions/runs/${{ github.run_id }}"
             tags:
               - PROCESS_GROUP_INSTANCE:service:order
