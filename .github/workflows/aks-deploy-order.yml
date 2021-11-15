@@ -14,12 +14,14 @@ on:
         default: '1'
   repository_dispatch:
     types: 
-      - deploy
+      - deploy1
+      - deploy2
 env:
   REGISTRY_NAME: dtdemos
   CLUSTER_NAME: jahn-aks-demo
   CLUSTER_RESOURCE_GROUP: jahn-aks-demo
   NAMESPACE: staging
+  FEATURE_NUMBER: '1'
 
 jobs:
   deploy:
@@ -29,9 +31,22 @@ jobs:
     - name: "Get code from github repo"
       uses: actions/checkout@master
       
+    - name: "Set new feature number"
+      run: |
+        if [ "${{ github.event.action" == "deploy1" }} ];then
+          FEATURE_NUMBER='1'
+        elif [ "${{ github.event.action" == "deploy2" }} ];then
+          FEATURE_NUMBER='2'
+        elif [ -z ${{ github.event.inputs.order-version }};then
+          FEATURE_NUMBER=${{ github.event.inputs.order-version }}
+        else
+          echo "Missing FEATURE_NUMBER argument"
+          exit 1
+        fi
+      
     - name: Update order-service.yml
       run: |
-        echo "Setting version to $NEW_VERSION"
+        echo "Setting feature to $NEW_VERSION"
         MANIFEST_FILE=manifests/order-service.yml
         sed -ie "s|version: .*$|version: \"${{ github.event.inputs.order-version }}\"|" $MANIFEST_FILE
         sed -ie "s|image: dtdemos/dt-orders-order-service:.*$|image: dtdemos/dt-orders-order-service:${{ github.event.inputs.order-version }}|" $MANIFEST_FILE
