@@ -31,8 +31,8 @@ spec:
         env:
         - name: DT_CUSTOM_PROP
           value: "project=dt-orders service=order"
-        - name: DT_RELEASE_BUILD_VERSION
-          value: "20210924.1601"
+        - name: DT_CLUSTER_ID
+          value: order-service
 ---
 apiVersion: v1
 kind: Service
