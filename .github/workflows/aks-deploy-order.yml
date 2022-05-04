@@ -76,7 +76,7 @@ jobs:
           ${{ env.REGISTRY_NAME }}/dt-orders-order-service:${{ env.version_num }}
 
     - name: "Dynatrace Deployment Event Order Service"
-      uses: dynatrace-oss/dynatrace-github-action@v7
+      uses: dynatrace-oss/dynatrace-github-action@v8
       with:
         url: '${{ secrets.DT_BASE_URL }}'
         token: '${{ secrets.DT_API_TOKEN }}'
