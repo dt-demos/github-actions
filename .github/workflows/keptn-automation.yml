@@ -2,7 +2,7 @@
 # KEPTN_BASE_URL
 # KEPTN_API_TOKEN 
 
-name: SLO Evaluation
+name: Keptn Automation
 on:
   workflow_dispatch:
   #schedule:
@@ -48,7 +48,7 @@ jobs:
           echo "-------------------------------------------------------"
           echo "keptn auth"
           echo "-------------------------------------------------------"
-          keptn auth -a $(KEPTN_BASE_URL)/api -e $(KEPTN_ENDPOINT)
+          keptn auth -a $(KEPTN_BASE_URL)/api -e $(KEPTN_API_TOKEN)
           echo "-------------------------------------------------------"
           echo "keptn status"
           echo "-------------------------------------------------------"
