@@ -48,7 +48,7 @@ jobs:
           echo "-------------------------------------------------------"
           echo "keptn auth"
           echo "-------------------------------------------------------"
-          keptn auth -a ${{ secrets.KEPTN_BASE_URL }}/api -e ${{ secrets.KEPTN_API_TOKEN }}
+          keptn auth -e ${{ secrets.KEPTN_BASE_URL }}/api -a ${{ secrets.KEPTN_API_TOKEN }}
           echo "-------------------------------------------------------"
           echo "keptn status"
           echo "-------------------------------------------------------"
